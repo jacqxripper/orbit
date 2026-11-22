@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +18,7 @@
   --text:#f4f2ff;
   --muted:#929bb8;
   --border:rgba(255,255,255,.09);
+  --green:#8de8c0;
 }
 * { box-sizing:border-box; }
 body {
@@ -29,11 +29,13 @@ body {
   font-family:'DM Sans',sans-serif;
   overflow-x:hidden;
 }
+button,input,textarea,select { font:inherit; }
+button { cursor:pointer; }
 .stars {
   position:fixed;
   inset:0;
   pointer-events:none;
-  opacity:.65;
+  opacity:.55;
   background-image:
     radial-gradient(2px 2px at 20px 30px,#fff,transparent),
     radial-gradient(1px 1px at 90px 100px,#fff,transparent),
@@ -54,73 +56,78 @@ body {
   border-radius:50%;
   background:#673bff;
   filter:blur(150px);
-  opacity:.16;
+  opacity:.15;
   top:15%;
   left:50%;
   transform:translateX(-50%);
   pointer-events:none;
 }
 header {
-  position:relative;
-  z-index:2;
+  position:sticky;
+  top:0;
+  z-index:10;
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 7%;
+  padding:17px 6%;
   border-bottom:1px solid var(--border);
-  background:rgba(8,11,24,.75);
+  background:rgba(8,11,24,.88);
   backdrop-filter:blur(15px);
 }
 .logo {
   font-family:'Space Grotesk',sans-serif;
-  font-size:25px;
+  font-size:24px;
   font-weight:700;
   letter-spacing:4px;
   background:linear-gradient(90deg,#fff,#a78bff,#57d3ff);
   color:transparent;
   background-clip:text;
 }
-.status {
-  color:#8de8c0;
-  font-size:12px;
+.headerRight {
+  color:var(--muted);
+  font-size:11px;
+  letter-spacing:1px;
 }
 main {
   position:relative;
   z-index:1;
-  width:min(480px,92%);
-  margin:45px auto;
+  width:min(650px,92%);
+  margin:28px auto 110px;
 }
-.intro { text-align:center; margin-bottom:28px; }
+.intro { text-align:center; margin-bottom:25px; }
 .planet {
-  font-size:62px;
   display:block;
-  margin-bottom:10px;
+  font-size:60px;
+  margin-bottom:9px;
   animation:float 4s ease-in-out infinite;
 }
 @keyframes float {
   0%,100% { transform:translateY(0) rotate(-4deg); }
-  50% { transform:translateY(-12px) rotate(4deg); }
+  50% { transform:translateY(-10px) rotate(4deg); }
 }
-h1 {
+h1,h2,h3 {
   font-family:'Space Grotesk',sans-serif;
-  font-size:32px;
-  margin:0 0 8px;
 }
+h1 { font-size:30px; margin:0 0 8px; }
+h2 { font-size:23px; margin:0 0 8px; }
+h3 { font-size:17px; margin:0 0 8px; }
 .subtitle { color:var(--muted); font-size:14px; }
 .card {
-  background:linear-gradient(145deg,rgba(25,34,60,.96),rgba(14,19,37,.96));
+  background:linear-gradient(145deg,rgba(25,34,60,.96),rgba(14,19,37,.97));
   border:1px solid var(--border);
-  border-radius:22px;
-  padding:25px;
-  box-shadow:0 20px 70px rgba(0,0,0,.25);
+  border-radius:21px;
+  padding:21px;
+  box-shadow:0 16px 55px rgba(0,0,0,.2);
+  margin-bottom:16px;
 }
+.authMain { width:min(480px,92%); margin:42px auto; }
 .tabs {
   display:flex;
   gap:8px;
   background:#090e1e;
   padding:5px;
   border-radius:12px;
-  margin-bottom:23px;
+  margin-bottom:22px;
 }
 .tabs button {
   flex:1;
@@ -130,44 +137,51 @@ h1 {
   padding:11px;
   border-radius:9px;
   font-weight:700;
-  cursor:pointer;
 }
 .tabs button.active {
   color:white;
   background:linear-gradient(100deg,#7655e8,#477ddf);
 }
-.field { margin-bottom:16px; }
+.field { margin-bottom:15px; }
 label {
   display:block;
   font-size:12px;
   color:#b8c0d9;
   margin-bottom:8px;
 }
-input,select {
+input,select,textarea {
   width:100%;
-  padding:14px;
+  padding:13px;
   border-radius:11px;
   border:1px solid var(--border);
   background:#090f20;
   color:white;
-  font:inherit;
   outline:none;
 }
-input:focus,select:focus { border-color:var(--purple); }
+textarea { min-height:105px; resize:vertical; }
+input:focus,select:focus,textarea:focus {
+  border-color:var(--purple);
+}
 select option { background:#11182b; }
-button.primary {
+.primary {
   width:100%;
   border:0;
   border-radius:12px;
-  padding:15px;
+  padding:14px;
   color:white;
-  font-size:14px;
   font-weight:800;
   background:linear-gradient(100deg,#8059f4,#477fe9);
-  cursor:pointer;
   margin-top:5px;
 }
-button:disabled { opacity:.55; cursor:wait; }
+.secondary {
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px;
+  color:white;
+  background:#171f36;
+  font-weight:700;
+}
 .google {
   width:100%;
   border:1px solid var(--border);
@@ -176,10 +190,9 @@ button:disabled { opacity:.55; cursor:wait; }
   border-radius:12px;
   padding:13px;
   font-weight:700;
-  cursor:pointer;
   margin-top:13px;
 }
-.google span { margin-right:8px; }
+button:disabled { opacity:.55; cursor:wait; }
 .separator {
   display:flex;
   align-items:center;
@@ -211,30 +224,169 @@ button:disabled { opacity:.55; cursor:wait; }
   color:#d4caff;
 }
 .message.show { display:block; }
-#appView { display:none; }
+#appView,#setupView { display:none; }
+.page { display:none; }
+.page.active { display:block; }
+.welcome {
+  padding:25px 21px;
+  overflow:hidden;
+  position:relative;
+}
+.welcome:after {
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  right:-55px;
+  top:-55px;
+  background:rgba(119,91,255,.15);
+  filter:blur(5px);
+}
+.welcomeTop {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+}
+.welcomeText { min-width:0; }
+.welcomeText p {
+  color:var(--muted);
+  margin:7px 0 0;
+  font-size:13px;
+}
+.ship {
+  font-size:54px;
+  flex-shrink:0;
+  animation:float 5s ease-in-out infinite;
+}
+.eyebrow {
+  color:#b7a6ff;
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:800;
+  margin-bottom:9px;
+}
+.sectionTitle {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:25px 2px 12px;
+}
+.sectionTitle h2 { font-size:19px; margin:0; }
+.sectionTitle span { color:var(--muted); font-size:11px; }
+.cometCard {
+  background:linear-gradient(135deg,rgba(71,65,143,.45),rgba(17,27,53,.97));
+  border-color:rgba(146,114,255,.24);
+}
+.cometIcon { font-size:30px; margin-bottom:10px; }
+.cometQuestion {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:19px;
+  line-height:1.4;
+  margin:8px 0 15px;
+}
+.cometMeta { color:var(--muted); font-size:11px; margin-bottom:12px; }
+.smallText { color:var(--muted); font-size:12px; line-height:1.6; }
+.savedAnswer {
+  display:none;
+  padding:12px;
+  margin-top:12px;
+  border-radius:11px;
+  background:rgba(141,232,192,.08);
+  border:1px solid rgba(141,232,192,.15);
+  color:#b7f4d9;
+  font-size:12px;
+  line-height:1.5;
+  overflow-wrap:anywhere;
+}
+.quickGrid {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:11px;
+}
+.quickItem {
+  min-height:110px;
+  text-align:left;
+  padding:16px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  color:var(--text);
+  background:rgba(17,24,43,.9);
+}
+.quickItem .emoji { font-size:25px; display:block; margin-bottom:10px; }
+.quickItem strong { display:block; font-size:13px; }
+.quickItem span:last-child { color:var(--muted); font-size:11px; }
+.statusBanner {
+  padding:12px 14px;
+  border:1px solid rgba(255,190,100,.2);
+  background:rgba(255,190,100,.07);
+  color:#ffd69a;
+  border-radius:12px;
+  font-size:12px;
+  line-height:1.5;
+  margin-bottom:15px;
+}
+.emptyIcon {
+  font-size:42px;
+  margin-bottom:12px;
+}
+.emptyState { text-align:center; padding:32px 18px; }
+.emptyState p {
+  color:var(--muted);
+  font-size:13px;
+  line-height:1.65;
+  max-width:390px;
+  margin:9px auto 0;
+}
 .profileIcon {
-  width:70px;
-  height:70px;
-  margin:0 auto 15px;
+  width:76px;
+  height:76px;
+  margin:0 auto 13px;
   display:grid;
   place-items:center;
-  font-size:36px;
+  font-size:38px;
   border-radius:50%;
   background:linear-gradient(140deg,#6546c9,#267cbd);
 }
 .accountCard { text-align:center; }
-.accountCard h2 { margin:5px 0; }
 .accountCard p { color:var(--muted); font-size:13px; }
 .accountInfo {
   text-align:left;
-  margin:22px 0;
-  padding:15px;
+  margin:20px 0;
+  padding:14px;
   border-radius:12px;
   background:#090f20;
   overflow-wrap:anywhere;
 }
-.accountInfo div { margin:9px 0; font-size:13px; }
+.accountInfo div { margin:10px 0; font-size:13px; }
 .accountInfo strong { color:#b8a7ff; }
+.bottomNav {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:20;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  padding:9px 4px calc(9px + env(safe-area-inset-bottom));
+  background:rgba(8,11,24,.96);
+  border-top:1px solid var(--border);
+  backdrop-filter:blur(16px);
+}
+.navBtn {
+  border:0;
+  background:transparent;
+  color:#77819e;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:4px;
+  font-size:10px;
+  padding:5px 1px;
+}
+.navBtn .navIcon { font-size:20px; }
+.navBtn.active { color:#bcaaff; }
 .logout {
   width:100%;
   padding:13px;
@@ -243,7 +395,7 @@ button:disabled { opacity:.55; cursor:wait; }
   color:#ff9eae;
   background:rgba(255,80,110,.08);
   font-weight:700;
-  cursor:pointer;
+  margin-top:12px;
 }
 footer {
   position:relative;
@@ -252,6 +404,15 @@ footer {
   padding:10px 20px 35px;
   color:#66708e;
   font-size:11px;
+}
+.hidden { display:none !important; }
+@media(max-width:390px) {
+  header { padding:15px 5%; }
+  .logo { font-size:21px; }
+  .headerRight { font-size:9px; }
+  .card { padding:17px; }
+  h1 { font-size:27px; }
+  .ship { font-size:43px; }
 }
 </style>
 </head>
@@ -262,10 +423,10 @@ footer {
 
 <header>
   <div class="logo">ORBIT</div>
-  <div class="status">✦ YOUR UNIVERSE AWAITS</div>
+  <div class="headerRight" id="headerStatus">✦ YOUR UNIVERSE AWAITS</div>
 </header>
 
-<main>
+<main id="authMain" class="authMain">
   <section id="authView">
     <div class="intro">
       <span class="planet">🪐</span>
@@ -279,16 +440,16 @@ footer {
         <button id="signupTab" type="button">Create account</button>
       </div>
 
-      <div id="message" class="message"></div>
+      <div id="authMessage" class="message"></div>
 
       <form id="authForm">
-        <div id="callsignField" class="field" style="display:none">
+        <div id="callsignField" class="field hidden">
           <label for="callsign">YOUR CALLSIGN</label>
           <input id="callsign" type="text" maxlength="20"
             placeholder="e.g. NovaExplorer" autocomplete="nickname">
         </div>
 
-        <div id="ageField" class="field" style="display:none">
+        <div id="ageField" class="field hidden">
           <label for="ageGroup">AGE GROUP</label>
           <select id="ageGroup">
             <option value="">Choose your age group</option>
@@ -305,12 +466,20 @@ footer {
 
         <div class="field">
           <label for="password">PASSWORD</label>
-          <input id="password" type="password" placeholder="At least 6 characters"
+          <input id="password" type="password"
+            placeholder="At least 6 characters"
             minlength="6" autocomplete="current-password" required>
         </div>
 
-        <button id="submitBtn" class="primary" type="submit">Login to ORBIT</button>
+        <button id="submitBtn" class="primary" type="submit">
+          Login to ORBIT
+        </button>
       </form>
+
+      <button id="forgotBtn" type="button" class="secondary"
+        style="margin-top:12px;background:transparent;border:0;color:#b8a7ff;font-size:12px">
+        Forgot password?
+      </button>
 
       <div class="separator">OR</div>
 
@@ -319,41 +488,223 @@ footer {
       </button>
 
       <div class="note">
-        ORBIT accounts are private by default. Your email and account details
-        are not public. Users in different age groups will not be mixed in
-        future discovery features. Age groups are self-declared and are not
-        identity verification.
+        Your email and private account details are not public.
+        Age groups are self-declared and are not identity verification.
+        Social discovery is not enabled in this version.
       </div>
     </div>
   </section>
+</main>
 
-  <section id="appView">
+<main id="appView" style="display:none">
+  <div id="verificationBanner" class="statusBanner hidden"></div>
+
+  <section id="homePage" class="page active">
+    <div class="card welcome">
+      <div class="welcomeTop">
+        <div class="welcomeText">
+          <div class="eyebrow">WELCOME BACK, ALIEN</div>
+          <h1 id="homeGreeting">Your orbit awaits.</h1>
+          <p>Your universe is yours to explore.</p>
+        </div>
+        <div class="ship">🚀</div>
+      </div>
+    </div>
+
+    <div class="sectionTitle">
+      <h2>Comet of the Day</h2>
+      <span>✦ DAILY TRANSMISSION</span>
+    </div>
+
+    <div class="card cometCard">
+      <div class="cometIcon">☄️</div>
+      <div class="eyebrow">TODAY'S QUESTION</div>
+      <div id="cometQuestion" class="cometQuestion"></div>
+      <div class="cometMeta">Your answer is private in this first version.</div>
+
+      <form id="cometForm">
+        <div class="field">
+          <textarea id="cometAnswer" maxlength="500"
+            placeholder="Send your answer into the universe..."
+            required></textarea>
+        </div>
+        <button id="cometSubmit" class="primary" type="submit">
+          Save my answer
+        </button>
+      </form>
+
+      <div id="savedAnswer" class="savedAnswer"></div>
+    </div>
+
+    <div class="sectionTitle">
+      <h2>Your universe</h2>
+      <span>YOUR DESTINATIONS</span>
+    </div>
+
+    <div class="quickGrid">
+      <button class="quickItem" data-page="explore">
+        <span class="emoji">🌌</span>
+        <strong>Explore</strong>
+        <span>Discover new worlds</span>
+      </button>
+      <button class="quickItem" data-page="signals">
+        <span class="emoji">📡</span>
+        <strong>Signals</strong>
+        <span>Incoming connections</span>
+      </button>
+      <button class="quickItem" data-page="companions">
+        <span class="emoji">🪐</span>
+        <strong>Companions</strong>
+        <span>Your cosmic circle</span>
+      </button>
+      <button class="quickItem" data-page="profile">
+        <span class="emoji">👽</span>
+        <strong>Homeworld</strong>
+        <span>Your personal profile</span>
+      </button>
+    </div>
+  </section>
+
+  <section id="explorePage" class="page">
     <div class="intro">
-      <span class="planet">🚀</span>
-      <h1>Welcome aboard.</h1>
-      <div class="subtitle">Your journey starts here, Alien.</div>
+      <span class="planet">🌌</span>
+      <h1>Explore</h1>
+      <div class="subtitle">There are worlds beyond your own.</div>
+    </div>
+    <div class="card emptyState">
+      <div class="emptyIcon">🛰️</div>
+      <h2>Preparing the galaxy</h2>
+      <p>
+        Real Alien discovery is not switched on yet.
+        We're building a separate, protected public-profile system
+        before showing anyone here.
+      </p>
+      <p><strong>No demo users. No invented profiles.</strong></p>
+    </div>
+  </section>
+
+  <section id="signalsPage" class="page">
+    <div class="intro">
+      <span class="planet">📡</span>
+      <h1>Signals</h1>
+      <div class="subtitle">First contact begins with a signal.</div>
+    </div>
+    <div class="card emptyState">
+      <div class="emptyIcon">📡</div>
+      <h2>Signal station offline</h2>
+      <p>
+        Friend requests will appear here when the secure
+        discovery and connection system is ready.
+      </p>
+      <p>No sample requests or fake notifications.</p>
+    </div>
+  </section>
+
+  <section id="companionsPage" class="page">
+    <div class="intro">
+      <span class="planet">🪐</span>
+      <h1>Companions</h1>
+      <div class="subtitle">The people in your orbit.</div>
+    </div>
+    <div class="card emptyState">
+      <div class="emptyIcon">👥</div>
+      <h2>Your crew starts here</h2>
+      <p>
+        Accepted connections will appear here after we build
+        real Signals and Companion records.
+      </p>
+      <p>Your companion list is not being filled with demo accounts.</p>
+    </div>
+  </section>
+
+  <section id="profilePage" class="page">
+    <div class="intro">
+      <span class="planet">👽</span>
+      <h1>Homeworld</h1>
+      <div class="subtitle">Your account, your corner of the universe.</div>
     </div>
 
     <div class="card accountCard">
       <div class="profileIcon">👽</div>
-      <h2 id="welcomeName">Unknown Voyager</h2>
-      <p id="welcomeEmail"></p>
+      <h2 id="profileCallsign">Unknown Voyager</h2>
+      <p id="profileEmail"></p>
 
       <div class="accountInfo">
-        <div><strong>Callsign:</strong> <span id="profileCallsign">—</span></div>
+        <div><strong>Callsign:</strong> <span id="profileCallsignInfo">—</span></div>
         <div><strong>Age group:</strong> <span id="profileAge">—</span></div>
-        <div><strong>Account:</strong> <span id="profileStatus">—</span></div>
+        <div><strong>Email:</strong> <span id="profileStatus">—</span></div>
+        <div><strong>Account:</strong> <span id="profileAccount">—</span></div>
       </div>
 
-      <p id="verificationMessage"></p>
-      <button id="resendVerification" class="google" type="button"
-        style="display:none">Resend verification email</button>
+      <div class="field" style="text-align:left">
+        <label for="editCallsign">CHANGE CALLSIGN</label>
+        <input id="editCallsign" type="text" maxlength="20">
+      </div>
+      <button id="saveProfile" class="secondary" type="button">
+        Save callsign
+      </button>
+
+      <button id="refreshVerification" class="secondary"
+        type="button" style="margin-top:10px">
+        I've verified my email
+      </button>
+
+      <button id="resendVerification" class="secondary"
+        type="button" style="margin-top:10px">
+        Resend verification email
+      </button>
+
       <button id="logoutBtn" class="logout" type="button">Log out</button>
     </div>
   </section>
 </main>
 
-<footer>ORBIT © 2026 · Explore your universe.</footer>
+<section id="setupView" class="authMain" style="display:none">
+  <div class="intro">
+    <span class="planet">🛠️</span>
+    <h1>Finish your Homeworld</h1>
+    <div class="subtitle">We need a few details to complete your account.</div>
+  </div>
+  <div class="card">
+    <div id="setupMessage" class="message"></div>
+    <form id="setupForm">
+      <div class="field">
+        <label for="setupCallsign">YOUR CALLSIGN</label>
+        <input id="setupCallsign" maxlength="20" minlength="3" required>
+      </div>
+      <div class="field">
+        <label for="setupAge">AGE GROUP</label>
+        <select id="setupAge" required>
+          <option value="">Choose your age group</option>
+          <option value="13-17">13–17</option>
+          <option value="18+">18+</option>
+        </select>
+      </div>
+      <button class="primary" type="submit">Complete my account</button>
+    </form>
+    <button id="setupLogout" class="logout" type="button">Log out</button>
+  </div>
+</section>
+
+<nav id="bottomNav" class="bottomNav hidden">
+  <button class="navBtn active" data-page="home">
+    <span class="navIcon">🏠</span><span>Home</span>
+  </button>
+  <button class="navBtn" data-page="explore">
+    <span class="navIcon">🌌</span><span>Explore</span>
+  </button>
+  <button class="navBtn" data-page="signals">
+    <span class="navIcon">📡</span><span>Signals</span>
+  </button>
+  <button class="navBtn" data-page="companions">
+    <span class="navIcon">🪐</span><span>Crew</span>
+  </button>
+  <button class="navBtn" data-page="profile">
+    <span class="navIcon">👽</span><span>Profile</span>
+  </button>
+</nav>
+
+<footer>ORBIT © 2026 · A universe full of strangers.</footer>
 
 <script type="module">
 import { initializeApp } from
@@ -368,7 +719,9 @@ import {
   getRedirectResult,
   onAuthStateChanged,
   signOut,
-  sendEmailVerification
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  reload
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
 
 import {
@@ -379,9 +732,8 @@ import {
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
 
-// ORBIT FIREBASE PROJECT
 const firebaseConfig = {
-  apiKey: "AIzaSyAQVfPNnssa2wg8vdUUY3dNXrItSsQJ8SA",
+  apiKey: "AIzaSyAQVfPNnssa2wg8vdUU3YdNXrItSsQJ8SA",
   authDomain: "orbit-95977.firebaseapp.com",
   projectId: "orbit-95977",
   storageBucket: "orbit-95977.firebasestorage.app",
@@ -394,55 +746,55 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const googleProvider = new GoogleAuthProvider();
 
+const $ = id => document.getElementById(id);
+
 let mode = "login";
+let currentUser = null;
+let currentProfile = null;
+let authOperation = false;
 
-const authView = document.getElementById("authView");
-const appView = document.getElementById("appView");
-const messageBox = document.getElementById("message");
-const authForm = document.getElementById("authForm");
-const submitBtn = document.getElementById("submitBtn");
+const cometQuestions = [
+  "If you could visit any planet in the universe, where would you go?",
+  "What's a small thing that can instantly make your day better?",
+  "If your life had a theme song, what kind of song would it be?",
+  "What's something you've always wanted to learn?",
+  "Would you rather explore the deepest ocean or outer space?",
+  "What's a fictional world you'd love to visit?",
+  "What's one thing you wish more people understood about you?"
+];
 
-function showMessage(message) {
-  messageBox.textContent = message;
-  messageBox.classList.add("show");
+function getDateKey() {
+  const d = new Date();
+  return [
+    d.getFullYear(),
+    String(d.getMonth() + 1).padStart(2, "0"),
+    String(d.getDate()).padStart(2, "0")
+  ].join("-");
 }
 
-function clearMessage() {
-  messageBox.textContent = "";
-  messageBox.classList.remove("show");
-}
-
-function setMode(newMode) {
-  mode = newMode;
-  clearMessage();
-
-  document.getElementById("loginTab").classList.toggle(
-    "active", mode === "login"
+function getTodayQuestion() {
+  const start = new Date(2026, 0, 1);
+  const today = new Date();
+  const day = Math.floor(
+    (new Date(today.getFullYear(), today.getMonth(), today.getDate()) - start)
+    / 86400000
   );
-  document.getElementById("signupTab").classList.toggle(
-    "active", mode === "signup"
-  );
-
-  document.getElementById("callsignField").style.display =
-    mode === "signup" ? "block" : "none";
-
-  document.getElementById("ageField").style.display =
-    mode === "signup" ? "block" : "none";
-
-  document.getElementById("callsign").required = mode === "signup";
-  document.getElementById("ageGroup").required = mode === "signup";
-
-  submitBtn.textContent =
-    mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
+  const index = ((day % cometQuestions.length) + cometQuestions.length)
+    % cometQuestions.length;
+  return cometQuestions[index];
 }
 
-document.getElementById("loginTab").addEventListener("click", () => {
-  setMode("login");
-});
+function showMessage(id, message) {
+  const box = $(id);
+  box.textContent = message;
+  box.classList.add("show");
+}
 
-document.getElementById("signupTab").addEventListener("click", () => {
-  setMode("signup");
-});
+function clearMessage(id) {
+  const box = $(id);
+  box.textContent = "";
+  box.classList.remove("show");
+}
 
 function friendlyError(error) {
   const messages = {
@@ -453,31 +805,76 @@ function friendlyError(error) {
     "auth/user-not-found": "No account was found. Create one first.",
     "auth/wrong-password": "Email or password is incorrect.",
     "auth/network-request-failed": "Connection problem. Check your internet.",
-    "auth/unauthorized-domain": "This preview address is not authorised in Firebase yet.",
+    "auth/unauthorized-domain": "This website domain is not authorised in Firebase.",
     "auth/popup-blocked": "The sign-in window was blocked. Try again.",
-    "permission-denied": "Firebase database rules blocked this action. Check the Firestore Rules tab."
+    "permission-denied": "Firestore rules blocked this action.",
+    "unavailable": "The service is temporarily unavailable. Try again."
   };
 
   return messages[error.code] ||
-    "Something went wrong: " + (error.message || "Please try again.");
+    error.message ||
+    "Something went wrong. Please try again.";
+}
+
+function setMode(newMode) {
+  mode = newMode;
+  clearMessage("authMessage");
+
+  $("loginTab").classList.toggle("active", mode === "login");
+  $("signupTab").classList.toggle("active", mode === "signup");
+
+  $("callsignField").classList.toggle("hidden", mode !== "signup");
+  $("ageField").classList.toggle("hidden", mode !== "signup");
+
+  $("callsign").required = mode === "signup";
+  $("ageGroup").required = mode === "signup";
+
+  $("submitBtn").textContent =
+    mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
+
+  $("forgotBtn").style.display = mode === "login" ? "block" : "none";
+}
+
+$("loginTab").addEventListener("click", () => setMode("login"));
+$("signupTab").addEventListener("click", () => setMode("signup"));
+
+function showAuth() {
+  $("authMain").style.display = "block";
+  $("authView").style.display = "block";
+  $("appView").style.display = "none";
+  $("setupView").style.display = "none";
+  $("bottomNav").classList.add("hidden");
+  $("headerStatus").textContent = "✦ YOUR UNIVERSE AWAITS";
+}
+
+function showSetup(user, suggestedAge = "") {
+  $("authMain").style.display = "none";
+  $("appView").style.display = "none";
+  $("setupView").style.display = "block";
+  $("bottomNav").classList.add("hidden");
+
+  $("setupCallsign").value = user.displayName || "";
+  $("setupAge").value = suggestedAge;
+}
+
+function showApp() {
+  $("authMain").style.display = "none";
+  $("setupView").style.display = "none";
+  $("appView").style.display = "block";
+  $("bottomNav").classList.remove("hidden");
+  $("headerStatus").textContent = "✦ ONLINE";
 }
 
 async function savePrivateProfile(user, callsign, ageGroup) {
   const userRef = doc(db, "users", user.uid);
   const existing = await getDoc(userRef);
 
-  if (existing.exists()) {
-    return existing.data();
-  }
-
-  if (!ageGroup) {
-    throw new Error("Choose your age group before creating your account.");
-  }
+  if (existing.exists()) return existing.data();
 
   const profile = {
     uid: user.uid,
     email: user.email || "",
-    callsign: callsign || (user.displayName || "New Alien"),
+    callsign: callsign,
     ageGroup: ageGroup,
     createdAt: serverTimestamp()
   };
@@ -486,173 +883,368 @@ async function savePrivateProfile(user, callsign, ageGroup) {
   return profile;
 }
 
-authForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  clearMessage();
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-  const callsign = document.getElementById("callsign").value.trim();
-  const ageGroup = document.getElementById("ageGroup").value;
-
-  if (mode === "signup") {
-    if (callsign.length < 3) {
-      showMessage("Your callsign must be at least 3 characters.");
-      return;
-    }
-    if (!ageGroup) {
-      showMessage("Please choose your age group.");
-      return;
-    }
-  }
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = "Connecting...";
-
-  try {
-    if (mode === "signup") {
-      const result = await createUserWithEmailAndPassword(
-        auth, email, password
-      );
-
-      await savePrivateProfile(result.user, callsign, ageGroup);
-      await sendEmailVerification(result.user);
-
-      showMessage("Account created! Check your email for a verification link.");
-    } else {
-      await signInWithEmailAndPassword(auth, email, password);
-    }
-  } catch (error) {
-    showMessage(friendlyError(error));
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent =
-      mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
-  }
-});
-
-document.getElementById("googleBtn").addEventListener("click", async () => {
-  clearMessage();
-
-  const ageGroup = document.getElementById("ageGroup").value;
-
-  if (mode === "signup" && !ageGroup) {
-    showMessage("Choose your age group before continuing with Google.");
-    return;
-  }
-
-  if (mode === "signup") {
-    sessionStorage.setItem("orbit_age_group", ageGroup);
-  }
-
-  try {
-    await signInWithRedirect(auth, googleProvider);
-  } catch (error) {
-    showMessage(friendlyError(error));
-  }
-});
-
-document.getElementById("logoutBtn").addEventListener("click", async () => {
-  try {
-    await signOut(auth);
-    showMessage("You have logged out.");
-  } catch (error) {
-    showMessage(friendlyError(error));
-  }
-});
-
-document.getElementById("resendVerification").addEventListener("click",
-  async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-
-    try {
-      await sendEmailVerification(user);
-      document.getElementById("verificationMessage").textContent =
-        "Verification email sent. Check your inbox.";
-    } catch (error) {
-      document.getElementById("verificationMessage").textContent =
-        friendlyError(error);
-    }
-  }
-);
-
-// Handle Google sign-in returning from Google's page.
-try {
-  const result = await getRedirectResult(auth);
-
-  if (result && result.user) {
-    const ageGroup = sessionStorage.getItem("orbit_age_group");
-    const userRef = doc(db, "users", result.user.uid);
-    const existing = await getDoc(userRef);
-
-    if (!existing.exists() && !ageGroup) {
-      await signOut(auth);
-      showMessage("Please choose your age group and try Google sign-in again.");
-    } else if (!existing.exists()) {
-      await savePrivateProfile(
-        result.user,
-        result.user.displayName || "New Alien",
-        ageGroup
-      );
-    }
-
-    sessionStorage.removeItem("orbit_age_group");
-  }
-} catch (error) {
-  showMessage(friendlyError(error));
-}
-
-onAuthStateChanged(auth, async (user) => {
+async function loadUser(user) {
   if (!user) {
-    authView.style.display = "block";
-    appView.style.display = "none";
+    currentUser = null;
+    currentProfile = null;
+    showAuth();
     return;
   }
+
+  currentUser = user;
+  $("headerStatus").textContent = "✦ CONNECTING";
 
   try {
     const userRef = doc(db, "users", user.uid);
     const snapshot = await getDoc(userRef);
 
     if (!snapshot.exists()) {
-      authView.style.display = "block";
-      appView.style.display = "none";
-      showMessage("Your account profile hasn't been created yet. Please contact support.");
+      const suggestedAge = sessionStorage.getItem("orbit_age_group") || "";
+      showSetup(user, suggestedAge);
       return;
     }
 
-    const profile = snapshot.data();
-
-    document.getElementById("welcomeName").textContent =
-      profile.callsign || "Unknown Voyager";
-
-    document.getElementById("welcomeEmail").textContent =
-      user.email || "";
-
-    document.getElementById("profileCallsign").textContent =
-      profile.callsign || "Not set";
-
-    document.getElementById("profileAge").textContent =
-      profile.ageGroup || "Not set";
-
-    document.getElementById("profileStatus").textContent =
-      user.emailVerified ? "Email verified" : "Email not verified";
-
-    document.getElementById("verificationMessage").textContent =
-      user.emailVerified
-        ? "Your email is verified."
-        : "Please verify your email. Real discovery features will require verification.";
-
-    document.getElementById("resendVerification").style.display =
-      user.emailVerified ? "none" : "block";
-
-    authView.style.display = "none";
-    appView.style.display = "block";
+    currentProfile = snapshot.data();
+    sessionStorage.removeItem("orbit_age_group");
+    renderProfile();
+    renderComet();
+    showApp();
+    switchPage("home");
 
   } catch (error) {
-    showMessage(friendlyError(error));
+    showAuth();
+    showMessage("authMessage", friendlyError(error));
+  }
+}
+
+function renderProfile() {
+  if (!currentUser || !currentProfile) return;
+
+  const callsign = currentProfile.callsign || "Unknown Voyager";
+
+  $("homeGreeting").textContent = "Hello, " + callsign + ".";
+  $("profileCallsign").textContent = callsign;
+  $("profileCallsignInfo").textContent = callsign;
+  $("profileEmail").textContent = currentUser.email || "";
+  $("profileAge").textContent = currentProfile.ageGroup || "Not set";
+  $("profileStatus").textContent =
+    currentUser.emailVerified ? "Verified" : "Not verified";
+  $("profileAccount").textContent = "Active";
+  $("editCallsign").value = callsign;
+
+  if (!currentUser.emailVerified) {
+    $("verificationBanner").classList.remove("hidden");
+    $("verificationBanner").textContent =
+      "Your email is not verified yet. Verify it before social features become available.";
+    $("refreshVerification").style.display = "block";
+    $("resendVerification").style.display = "block";
+  } else {
+    $("verificationBanner").classList.add("hidden");
+    $("refreshVerification").style.display = "none";
+    $("resendVerification").style.display = "none";
+  }
+}
+
+function renderComet() {
+  $("cometQuestion").textContent = getTodayQuestion();
+
+  const savedDate = currentProfile?.cometDate || "";
+  const today = getDateKey();
+
+  if (savedDate === today && currentProfile?.cometAnswer) {
+    $("cometAnswer").value = currentProfile.cometAnswer;
+    $("savedAnswer").textContent =
+      "Your answer is saved privately: " + currentProfile.cometAnswer;
+    $("savedAnswer").style.display = "block";
+    $("cometSubmit").textContent = "Update my answer";
+  } else {
+    $("cometAnswer").value = "";
+    $("savedAnswer").style.display = "none";
+    $("cometSubmit").textContent = "Save my answer";
+  }
+}
+
+function switchPage(pageName) {
+  const allowed = ["home", "explore", "signals", "companions", "profile"];
+  if (!allowed.includes(pageName)) return;
+
+  document.querySelectorAll(".page").forEach(page => {
+    page.classList.remove("active");
+  });
+
+  const target = $(pageName + "Page");
+  if (target) target.classList.add("active");
+
+  document.querySelectorAll(".navBtn").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === pageName
+    );
+  });
+
+  window.scrollTo({ top:0, behavior:"smooth" });
+}
+
+document.querySelectorAll("[data-page]").forEach(button => {
+  button.addEventListener("click", () => {
+    switchPage(button.dataset.page);
+  });
+});
+
+$("authForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearMessage("authMessage");
+
+  const email = $("email").value.trim();
+  const password = $("password").value;
+  const callsign = $("callsign").value.trim();
+  const ageGroup = $("ageGroup").value;
+
+  if (mode === "signup") {
+    if (callsign.length < 3) {
+      showMessage("authMessage", "Your callsign must be at least 3 characters.");
+      return;
+    }
+    if (!ageGroup) {
+      showMessage("authMessage", "Choose your age group.");
+      return;
+    }
+  }
+
+  $("submitBtn").disabled = true;
+  $("submitBtn").textContent = "Connecting...";
+  authOperation = true;
+
+  try {
+    let user;
+
+    if (mode === "signup") {
+      const result = await createUserWithEmailAndPassword(
+        auth, email, password
+      );
+      user = result.user;
+
+      await savePrivateProfile(user, callsign, ageGroup);
+      await sendEmailVerification(user);
+    } else {
+      const result = await signInWithEmailAndPassword(
+        auth, email, password
+      );
+      user = result.user;
+    }
+
+    await loadUser(user);
+
+    if (mode === "signup") {
+      $("verificationBanner").classList.remove("hidden");
+      $("verificationBanner").textContent =
+        "Account created! Check your email for a verification link.";
+    }
+
+  } catch (error) {
+    showAuth();
+    showMessage("authMessage", friendlyError(error));
+  } finally {
+    authOperation = false;
+    $("submitBtn").disabled = false;
+    $("submitBtn").textContent =
+      mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
   }
 });
+
+$("forgotBtn").addEventListener("click", async () => {
+  const email = $("email").value.trim();
+
+  if (!email) {
+    showMessage("authMessage", "Enter your email address first.");
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showMessage("authMessage", "Password reset email sent. Check your inbox.");
+  } catch (error) {
+    showMessage("authMessage", friendlyError(error));
+  }
+});
+
+$("googleBtn").addEventListener("click", async () => {
+  clearMessage("authMessage");
+
+  if (mode === "signup") {
+    const ageGroup = $("ageGroup").value;
+    if (!ageGroup) {
+      showMessage("authMessage", "Choose your age group first.");
+      return;
+    }
+    sessionStorage.setItem("orbit_age_group", ageGroup);
+  }
+
+  try {
+    await signInWithRedirect(auth, googleProvider);
+  } catch (error) {
+    showMessage("authMessage", friendlyError(error));
+  }
+});
+
+$("setupForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  clearMessage("setupMessage");
+
+  const callsign = $("setupCallsign").value.trim();
+  const ageGroup = $("setupAge").value;
+
+  if (callsign.length < 3) {
+    showMessage("setupMessage", "Your callsign must be at least 3 characters.");
+    return;
+  }
+
+  if (!ageGroup || !currentUser) {
+    showMessage("setupMessage", "Choose your age group.");
+    return;
+  }
+
+  const button = $("setupForm").querySelector("button");
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+  try {
+    await savePrivateProfile(currentUser, callsign, ageGroup);
+    await loadUser(currentUser);
+    sessionStorage.removeItem("orbit_age_group");
+  } catch (error) {
+    showMessage("setupMessage", friendlyError(error));
+  } finally {
+    button.disabled = false;
+    button.textContent = "Complete my account";
+  }
+});
+
+$("setupLogout").addEventListener("click", async () => {
+  await signOut(auth);
+});
+
+$("cometForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!currentUser || !currentProfile) return;
+
+  const answer = $("cometAnswer").value.trim();
+  if (!answer) return;
+
+  const button = $("cometSubmit");
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+  try {
+    await setDoc(
+      doc(db, "users", currentUser.uid),
+      {
+        cometDate: getDateKey(),
+        cometAnswer: answer
+      },
+      { merge:true }
+    );
+
+    currentProfile.cometDate = getDateKey();
+    currentProfile.cometAnswer = answer;
+
+    $("savedAnswer").textContent =
+      "Your answer is saved privately: " + answer;
+    $("savedAnswer").style.display = "block";
+    button.textContent = "Update my answer";
+
+  } catch (error) {
+    alert(friendlyError(error));
+    button.textContent = "Try again";
+  } finally {
+    button.disabled = false;
+  }
+});
+
+$("saveProfile").addEventListener("click", async () => {
+  if (!currentUser || !currentProfile) return;
+
+  const callsign = $("editCallsign").value.trim();
+
+  if (callsign.length < 3) {
+    alert("Your callsign must be at least 3 characters.");
+    return;
+  }
+
+  const button = $("saveProfile");
+  button.disabled = true;
+  button.textContent = "Saving...";
+
+  try {
+    await setDoc(
+      doc(db, "users", currentUser.uid),
+      { callsign:callsign },
+      { merge:true }
+    );
+
+    currentProfile.callsign = callsign;
+    renderProfile();
+    alert("Callsign updated.");
+
+  } catch (error) {
+    alert(friendlyError(error));
+  } finally {
+    button.disabled = false;
+    button.textContent = "Save callsign";
+  }
+});
+
+$("refreshVerification").addEventListener("click", async () => {
+  if (!currentUser) return;
+
+  try {
+    await reload(currentUser);
+    currentUser = auth.currentUser;
+    renderProfile();
+
+    alert(
+      currentUser.emailVerified
+        ? "Your email is verified."
+        : "We haven't detected verification yet. Open the email link, then try again."
+    );
+  } catch (error) {
+    alert(friendlyError(error));
+  }
+});
+
+$("resendVerification").addEventListener("click", async () => {
+  if (!currentUser) return;
+
+  try {
+    await sendEmailVerification(currentUser);
+    alert("Verification email sent. Check your inbox.");
+  } catch (error) {
+    alert(friendlyError(error));
+  }
+});
+
+async function logout() {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    alert(friendlyError(error));
+  }
+}
+
+$("logoutBtn").addEventListener("click", logout);
+
+try {
+  await getRedirectResult(auth);
+} catch (error) {
+  showMessage("authMessage", friendlyError(error));
+}
+
+onAuthStateChanged(auth, async user => {
+  if (authOperation) return;
+  await loadUser(user);
+});
+
 </script>
 </body>
 </html>
