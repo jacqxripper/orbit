@@ -1,0 +1,658 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b18">
+<title>ORBIT — Your Universe Awaits</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#080b18;
+  --panel:#11182b;
+  --panel2:#171f36;
+  --purple:#9272ff;
+  --blue:#55c8ff;
+  --text:#f4f2ff;
+  --muted:#929bb8;
+  --border:rgba(255,255,255,.09);
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  color:var(--text);
+  font-family:'DM Sans',sans-serif;
+  overflow-x:hidden;
+}
+.stars {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.65;
+  background-image:
+    radial-gradient(2px 2px at 20px 30px,#fff,transparent),
+    radial-gradient(1px 1px at 90px 100px,#fff,transparent),
+    radial-gradient(2px 2px at 180px 60px,#a9a1ff,transparent),
+    radial-gradient(1px 1px at 250px 180px,#fff,transparent),
+    radial-gradient(2px 2px at 330px 40px,#fff,transparent);
+  background-size:390px 240px;
+  animation:starMove 45s linear infinite;
+}
+@keyframes starMove {
+  from { transform:translateY(0); }
+  to { transform:translateY(-240px); }
+}
+.glow {
+  position:fixed;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  background:#673bff;
+  filter:blur(150px);
+  opacity:.16;
+  top:15%;
+  left:50%;
+  transform:translateX(-50%);
+  pointer-events:none;
+}
+header {
+  position:relative;
+  z-index:2;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 7%;
+  border-bottom:1px solid var(--border);
+  background:rgba(8,11,24,.75);
+  backdrop-filter:blur(15px);
+}
+.logo {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:4px;
+  background:linear-gradient(90deg,#fff,#a78bff,#57d3ff);
+  color:transparent;
+  background-clip:text;
+}
+.status {
+  color:#8de8c0;
+  font-size:12px;
+}
+main {
+  position:relative;
+  z-index:1;
+  width:min(480px,92%);
+  margin:45px auto;
+}
+.intro { text-align:center; margin-bottom:28px; }
+.planet {
+  font-size:62px;
+  display:block;
+  margin-bottom:10px;
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform:translateY(0) rotate(-4deg); }
+  50% { transform:translateY(-12px) rotate(4deg); }
+}
+h1 {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:32px;
+  margin:0 0 8px;
+}
+.subtitle { color:var(--muted); font-size:14px; }
+.card {
+  background:linear-gradient(145deg,rgba(25,34,60,.96),rgba(14,19,37,.96));
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:25px;
+  box-shadow:0 20px 70px rgba(0,0,0,.25);
+}
+.tabs {
+  display:flex;
+  gap:8px;
+  background:#090e1e;
+  padding:5px;
+  border-radius:12px;
+  margin-bottom:23px;
+}
+.tabs button {
+  flex:1;
+  background:transparent;
+  color:var(--muted);
+  border:0;
+  padding:11px;
+  border-radius:9px;
+  font-weight:700;
+  cursor:pointer;
+}
+.tabs button.active {
+  color:white;
+  background:linear-gradient(100deg,#7655e8,#477ddf);
+}
+.field { margin-bottom:16px; }
+label {
+  display:block;
+  font-size:12px;
+  color:#b8c0d9;
+  margin-bottom:8px;
+}
+input,select {
+  width:100%;
+  padding:14px;
+  border-radius:11px;
+  border:1px solid var(--border);
+  background:#090f20;
+  color:white;
+  font:inherit;
+  outline:none;
+}
+input:focus,select:focus { border-color:var(--purple); }
+select option { background:#11182b; }
+button.primary {
+  width:100%;
+  border:0;
+  border-radius:12px;
+  padding:15px;
+  color:white;
+  font-size:14px;
+  font-weight:800;
+  background:linear-gradient(100deg,#8059f4,#477fe9);
+  cursor:pointer;
+  margin-top:5px;
+}
+button:disabled { opacity:.55; cursor:wait; }
+.google {
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  color:#222;
+  border-radius:12px;
+  padding:13px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:13px;
+}
+.google span { margin-right:8px; }
+.separator {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--muted);
+  font-size:12px;
+  margin:17px 0;
+}
+.separator:before,.separator:after {
+  content:"";
+  height:1px;
+  flex:1;
+  background:var(--border);
+}
+.note {
+  font-size:11px;
+  line-height:1.6;
+  color:var(--muted);
+  margin-top:16px;
+}
+.message {
+  display:none;
+  padding:12px;
+  margin-bottom:15px;
+  border-radius:10px;
+  font-size:13px;
+  line-height:1.5;
+  background:rgba(146,114,255,.12);
+  color:#d4caff;
+}
+.message.show { display:block; }
+#appView { display:none; }
+.profileIcon {
+  width:70px;
+  height:70px;
+  margin:0 auto 15px;
+  display:grid;
+  place-items:center;
+  font-size:36px;
+  border-radius:50%;
+  background:linear-gradient(140deg,#6546c9,#267cbd);
+}
+.accountCard { text-align:center; }
+.accountCard h2 { margin:5px 0; }
+.accountCard p { color:var(--muted); font-size:13px; }
+.accountInfo {
+  text-align:left;
+  margin:22px 0;
+  padding:15px;
+  border-radius:12px;
+  background:#090f20;
+  overflow-wrap:anywhere;
+}
+.accountInfo div { margin:9px 0; font-size:13px; }
+.accountInfo strong { color:#b8a7ff; }
+.logout {
+  width:100%;
+  padding:13px;
+  border:1px solid rgba(255,110,130,.3);
+  border-radius:11px;
+  color:#ff9eae;
+  background:rgba(255,80,110,.08);
+  font-weight:700;
+  cursor:pointer;
+}
+footer {
+  position:relative;
+  z-index:1;
+  text-align:center;
+  padding:10px 20px 35px;
+  color:#66708e;
+  font-size:11px;
+}
+</style>
+</head>
+
+<body>
+<div class="stars"></div>
+<div class="glow"></div>
+
+<header>
+  <div class="logo">ORBIT</div>
+  <div class="status">✦ YOUR UNIVERSE AWAITS</div>
+</header>
+
+<main>
+  <section id="authView">
+    <div class="intro">
+      <span class="planet">🪐</span>
+      <h1>Find your orbit.</h1>
+      <div class="subtitle">A universe full of possibilities.</div>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button id="loginTab" class="active" type="button">Login</button>
+        <button id="signupTab" type="button">Create account</button>
+      </div>
+
+      <div id="message" class="message"></div>
+
+      <form id="authForm">
+        <div id="callsignField" class="field" style="display:none">
+          <label for="callsign">YOUR CALLSIGN</label>
+          <input id="callsign" type="text" maxlength="20"
+            placeholder="e.g. NovaExplorer" autocomplete="nickname">
+        </div>
+
+        <div id="ageField" class="field" style="display:none">
+          <label for="ageGroup">AGE GROUP</label>
+          <select id="ageGroup">
+            <option value="">Choose your age group</option>
+            <option value="13-17">13–17</option>
+            <option value="18+">18+</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="email">EMAIL ADDRESS</label>
+          <input id="email" type="email" placeholder="you@example.com"
+            autocomplete="email" required>
+        </div>
+
+        <div class="field">
+          <label for="password">PASSWORD</label>
+          <input id="password" type="password" placeholder="At least 6 characters"
+            minlength="6" autocomplete="current-password" required>
+        </div>
+
+        <button id="submitBtn" class="primary" type="submit">Login to ORBIT</button>
+      </form>
+
+      <div class="separator">OR</div>
+
+      <button id="googleBtn" class="google" type="button">
+        <span>G</span> Continue with Google
+      </button>
+
+      <div class="note">
+        ORBIT accounts are private by default. Your email and account details
+        are not public. Users in different age groups will not be mixed in
+        future discovery features. Age groups are self-declared and are not
+        identity verification.
+      </div>
+    </div>
+  </section>
+
+  <section id="appView">
+    <div class="intro">
+      <span class="planet">🚀</span>
+      <h1>Welcome aboard.</h1>
+      <div class="subtitle">Your journey starts here, Alien.</div>
+    </div>
+
+    <div class="card accountCard">
+      <div class="profileIcon">👽</div>
+      <h2 id="welcomeName">Unknown Voyager</h2>
+      <p id="welcomeEmail"></p>
+
+      <div class="accountInfo">
+        <div><strong>Callsign:</strong> <span id="profileCallsign">—</span></div>
+        <div><strong>Age group:</strong> <span id="profileAge">—</span></div>
+        <div><strong>Account:</strong> <span id="profileStatus">—</span></div>
+      </div>
+
+      <p id="verificationMessage"></p>
+      <button id="resendVerification" class="google" type="button"
+        style="display:none">Resend verification email</button>
+      <button id="logoutBtn" class="logout" type="button">Log out</button>
+    </div>
+  </section>
+</main>
+
+<footer>ORBIT © 2026 · Explore your universe.</footer>
+
+<script type="module">
+import { initializeApp } from
+  "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  signOut,
+  sendEmailVerification
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+
+// ORBIT FIREBASE PROJECT
+const firebaseConfig = {
+  apiKey: "AIzaSyAQVfPNnssa2wg8vdUUY3dNXrItSsQJ8SA",
+  authDomain: "orbit-95977.firebaseapp.com",
+  projectId: "orbit-95977",
+  storageBucket: "orbit-95977.firebasestorage.app",
+  messagingSenderId: "411222476333",
+  appId: "1:411222476333:web:1ff6e0151b0329a01e5aa4"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const googleProvider = new GoogleAuthProvider();
+
+let mode = "login";
+
+const authView = document.getElementById("authView");
+const appView = document.getElementById("appView");
+const messageBox = document.getElementById("message");
+const authForm = document.getElementById("authForm");
+const submitBtn = document.getElementById("submitBtn");
+
+function showMessage(message) {
+  messageBox.textContent = message;
+  messageBox.classList.add("show");
+}
+
+function clearMessage() {
+  messageBox.textContent = "";
+  messageBox.classList.remove("show");
+}
+
+function setMode(newMode) {
+  mode = newMode;
+  clearMessage();
+
+  document.getElementById("loginTab").classList.toggle(
+    "active", mode === "login"
+  );
+  document.getElementById("signupTab").classList.toggle(
+    "active", mode === "signup"
+  );
+
+  document.getElementById("callsignField").style.display =
+    mode === "signup" ? "block" : "none";
+
+  document.getElementById("ageField").style.display =
+    mode === "signup" ? "block" : "none";
+
+  document.getElementById("callsign").required = mode === "signup";
+  document.getElementById("ageGroup").required = mode === "signup";
+
+  submitBtn.textContent =
+    mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
+}
+
+document.getElementById("loginTab").addEventListener("click", () => {
+  setMode("login");
+});
+
+document.getElementById("signupTab").addEventListener("click", () => {
+  setMode("signup");
+});
+
+function friendlyError(error) {
+  const messages = {
+    "auth/email-already-in-use": "This email already has an account. Try logging in.",
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/weak-password": "Your password must have at least 6 characters.",
+    "auth/invalid-credential": "Email or password is incorrect.",
+    "auth/user-not-found": "No account was found. Create one first.",
+    "auth/wrong-password": "Email or password is incorrect.",
+    "auth/network-request-failed": "Connection problem. Check your internet.",
+    "auth/unauthorized-domain": "This preview address is not authorised in Firebase yet.",
+    "auth/popup-blocked": "The sign-in window was blocked. Try again.",
+    "permission-denied": "Firebase database rules blocked this action. Check the Firestore Rules tab."
+  };
+
+  return messages[error.code] ||
+    "Something went wrong: " + (error.message || "Please try again.");
+}
+
+async function savePrivateProfile(user, callsign, ageGroup) {
+  const userRef = doc(db, "users", user.uid);
+  const existing = await getDoc(userRef);
+
+  if (existing.exists()) {
+    return existing.data();
+  }
+
+  if (!ageGroup) {
+    throw new Error("Choose your age group before creating your account.");
+  }
+
+  const profile = {
+    uid: user.uid,
+    email: user.email || "",
+    callsign: callsign || (user.displayName || "New Alien"),
+    ageGroup: ageGroup,
+    createdAt: serverTimestamp()
+  };
+
+  await setDoc(userRef, profile);
+  return profile;
+}
+
+authForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  clearMessage();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const callsign = document.getElementById("callsign").value.trim();
+  const ageGroup = document.getElementById("ageGroup").value;
+
+  if (mode === "signup") {
+    if (callsign.length < 3) {
+      showMessage("Your callsign must be at least 3 characters.");
+      return;
+    }
+    if (!ageGroup) {
+      showMessage("Please choose your age group.");
+      return;
+    }
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Connecting...";
+
+  try {
+    if (mode === "signup") {
+      const result = await createUserWithEmailAndPassword(
+        auth, email, password
+      );
+
+      await savePrivateProfile(result.user, callsign, ageGroup);
+      await sendEmailVerification(result.user);
+
+      showMessage("Account created! Check your email for a verification link.");
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+    }
+  } catch (error) {
+    showMessage(friendlyError(error));
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent =
+      mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
+  }
+});
+
+document.getElementById("googleBtn").addEventListener("click", async () => {
+  clearMessage();
+
+  const ageGroup = document.getElementById("ageGroup").value;
+
+  if (mode === "signup" && !ageGroup) {
+    showMessage("Choose your age group before continuing with Google.");
+    return;
+  }
+
+  if (mode === "signup") {
+    sessionStorage.setItem("orbit_age_group", ageGroup);
+  }
+
+  try {
+    await signInWithRedirect(auth, googleProvider);
+  } catch (error) {
+    showMessage(friendlyError(error));
+  }
+});
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+  try {
+    await signOut(auth);
+    showMessage("You have logged out.");
+  } catch (error) {
+    showMessage(friendlyError(error));
+  }
+});
+
+document.getElementById("resendVerification").addEventListener("click",
+  async () => {
+    const user = auth.currentUser;
+    if (!user) return;
+
+    try {
+      await sendEmailVerification(user);
+      document.getElementById("verificationMessage").textContent =
+        "Verification email sent. Check your inbox.";
+    } catch (error) {
+      document.getElementById("verificationMessage").textContent =
+        friendlyError(error);
+    }
+  }
+);
+
+// Handle Google sign-in returning from Google's page.
+try {
+  const result = await getRedirectResult(auth);
+
+  if (result && result.user) {
+    const ageGroup = sessionStorage.getItem("orbit_age_group");
+    const userRef = doc(db, "users", result.user.uid);
+    const existing = await getDoc(userRef);
+
+    if (!existing.exists() && !ageGroup) {
+      await signOut(auth);
+      showMessage("Please choose your age group and try Google sign-in again.");
+    } else if (!existing.exists()) {
+      await savePrivateProfile(
+        result.user,
+        result.user.displayName || "New Alien",
+        ageGroup
+      );
+    }
+
+    sessionStorage.removeItem("orbit_age_group");
+  }
+} catch (error) {
+  showMessage(friendlyError(error));
+}
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    authView.style.display = "block";
+    appView.style.display = "none";
+    return;
+  }
+
+  try {
+    const userRef = doc(db, "users", user.uid);
+    const snapshot = await getDoc(userRef);
+
+    if (!snapshot.exists()) {
+      authView.style.display = "block";
+      appView.style.display = "none";
+      showMessage("Your account profile hasn't been created yet. Please contact support.");
+      return;
+    }
+
+    const profile = snapshot.data();
+
+    document.getElementById("welcomeName").textContent =
+      profile.callsign || "Unknown Voyager";
+
+    document.getElementById("welcomeEmail").textContent =
+      user.email || "";
+
+    document.getElementById("profileCallsign").textContent =
+      profile.callsign || "Not set";
+
+    document.getElementById("profileAge").textContent =
+      profile.ageGroup || "Not set";
+
+    document.getElementById("profileStatus").textContent =
+      user.emailVerified ? "Email verified" : "Email not verified";
+
+    document.getElementById("verificationMessage").textContent =
+      user.emailVerified
+        ? "Your email is verified."
+        : "Please verify your email. Real discovery features will require verification.";
+
+    document.getElementById("resendVerification").style.display =
+      user.emailVerified ? "none" : "block";
+
+    authView.style.display = "none";
+    appView.style.display = "block";
+
+  } catch (error) {
+    showMessage(friendlyError(error));
+  }
+});
+</script>
+</body>
+</html>
