@@ -2,1249 +2,411 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080b18">
-<title>ORBIT — Your Universe Awaits</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070817">
+<title>ORBIT — Connect Beyond Worlds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
 <style>
-:root {
-  --bg:#080b18;
-  --panel:#11182b;
-  --panel2:#171f36;
-  --purple:#9272ff;
-  --blue:#55c8ff;
-  --text:#f4f2ff;
-  --muted:#929bb8;
-  --border:rgba(255,255,255,.09);
-  --green:#8de8c0;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  min-height:100vh;
-  background:var(--bg);
-  color:var(--text);
-  font-family:'DM Sans',sans-serif;
-  overflow-x:hidden;
-}
-button,input,textarea,select { font:inherit; }
-button { cursor:pointer; }
-.stars {
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:.55;
-  background-image:
-    radial-gradient(2px 2px at 20px 30px,#fff,transparent),
-    radial-gradient(1px 1px at 90px 100px,#fff,transparent),
-    radial-gradient(2px 2px at 180px 60px,#a9a1ff,transparent),
-    radial-gradient(1px 1px at 250px 180px,#fff,transparent),
-    radial-gradient(2px 2px at 330px 40px,#fff,transparent);
-  background-size:390px 240px;
-  animation:starMove 45s linear infinite;
-}
-@keyframes starMove {
-  from { transform:translateY(0); }
-  to { transform:translateY(-240px); }
-}
-.glow {
-  position:fixed;
-  width:300px;
-  height:300px;
-  border-radius:50%;
-  background:#673bff;
-  filter:blur(150px);
-  opacity:.15;
-  top:15%;
-  left:50%;
-  transform:translateX(-50%);
-  pointer-events:none;
-}
-header {
-  position:sticky;
-  top:0;
-  z-index:10;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:17px 6%;
-  border-bottom:1px solid var(--border);
-  background:rgba(8,11,24,.88);
-  backdrop-filter:blur(15px);
-}
-.logo {
-  font-family:'Space Grotesk',sans-serif;
-  font-size:24px;
-  font-weight:700;
-  letter-spacing:4px;
-  background:linear-gradient(90deg,#fff,#a78bff,#57d3ff);
-  color:transparent;
-  background-clip:text;
-}
-.headerRight {
-  color:var(--muted);
-  font-size:11px;
-  letter-spacing:1px;
-}
-main {
-  position:relative;
-  z-index:1;
-  width:min(650px,92%);
-  margin:28px auto 110px;
-}
-.intro { text-align:center; margin-bottom:25px; }
-.planet {
-  display:block;
-  font-size:60px;
-  margin-bottom:9px;
-  animation:float 4s ease-in-out infinite;
-}
-@keyframes float {
-  0%,100% { transform:translateY(0) rotate(-4deg); }
-  50% { transform:translateY(-10px) rotate(4deg); }
-}
-h1,h2,h3 {
-  font-family:'Space Grotesk',sans-serif;
-}
-h1 { font-size:30px; margin:0 0 8px; }
-h2 { font-size:23px; margin:0 0 8px; }
-h3 { font-size:17px; margin:0 0 8px; }
-.subtitle { color:var(--muted); font-size:14px; }
-.card {
-  background:linear-gradient(145deg,rgba(25,34,60,.96),rgba(14,19,37,.97));
-  border:1px solid var(--border);
-  border-radius:21px;
-  padding:21px;
-  box-shadow:0 16px 55px rgba(0,0,0,.2);
-  margin-bottom:16px;
-}
-.authMain { width:min(480px,92%); margin:42px auto; }
-.tabs {
-  display:flex;
-  gap:8px;
-  background:#090e1e;
-  padding:5px;
-  border-radius:12px;
-  margin-bottom:22px;
-}
-.tabs button {
-  flex:1;
-  background:transparent;
-  color:var(--muted);
-  border:0;
-  padding:11px;
-  border-radius:9px;
-  font-weight:700;
-}
-.tabs button.active {
-  color:white;
-  background:linear-gradient(100deg,#7655e8,#477ddf);
-}
-.field { margin-bottom:15px; }
-label {
-  display:block;
-  font-size:12px;
-  color:#b8c0d9;
-  margin-bottom:8px;
-}
-input,select,textarea {
-  width:100%;
-  padding:13px;
-  border-radius:11px;
-  border:1px solid var(--border);
-  background:#090f20;
-  color:white;
-  outline:none;
-}
-textarea { min-height:105px; resize:vertical; }
-input:focus,select:focus,textarea:focus {
-  border-color:var(--purple);
-}
-select option { background:#11182b; }
-.primary {
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:14px;
-  color:white;
-  font-weight:800;
-  background:linear-gradient(100deg,#8059f4,#477fe9);
-  margin-top:5px;
-}
-.secondary {
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:13px;
-  color:white;
-  background:#171f36;
-  font-weight:700;
-}
-.google {
-  width:100%;
-  border:1px solid var(--border);
-  background:#fff;
-  color:#222;
-  border-radius:12px;
-  padding:13px;
-  font-weight:700;
-  margin-top:13px;
-}
-button:disabled { opacity:.55; cursor:wait; }
-.separator {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:var(--muted);
-  font-size:12px;
-  margin:17px 0;
-}
-.separator:before,.separator:after {
-  content:"";
-  height:1px;
-  flex:1;
-  background:var(--border);
-}
-.note {
-  font-size:11px;
-  line-height:1.6;
-  color:var(--muted);
-  margin-top:16px;
-}
-.message {
-  display:none;
-  padding:12px;
-  margin-bottom:15px;
-  border-radius:10px;
-  font-size:13px;
-  line-height:1.5;
-  background:rgba(146,114,255,.12);
-  color:#d4caff;
-}
-.message.show { display:block; }
-#appView,#setupView { display:none; }
-.page { display:none; }
-.page.active { display:block; }
-.welcome {
-  padding:25px 21px;
-  overflow:hidden;
-  position:relative;
-}
-.welcome:after {
-  content:"";
-  position:absolute;
-  width:150px;
-  height:150px;
-  border-radius:50%;
-  right:-55px;
-  top:-55px;
-  background:rgba(119,91,255,.15);
-  filter:blur(5px);
-}
-.welcomeTop {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-.welcomeText { min-width:0; }
-.welcomeText p {
-  color:var(--muted);
-  margin:7px 0 0;
-  font-size:13px;
-}
-.ship {
-  font-size:54px;
-  flex-shrink:0;
-  animation:float 5s ease-in-out infinite;
-}
-.eyebrow {
-  color:#b7a6ff;
-  font-size:10px;
-  letter-spacing:2px;
-  font-weight:800;
-  margin-bottom:9px;
-}
-.sectionTitle {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin:25px 2px 12px;
-}
-.sectionTitle h2 { font-size:19px; margin:0; }
-.sectionTitle span { color:var(--muted); font-size:11px; }
-.cometCard {
-  background:linear-gradient(135deg,rgba(71,65,143,.45),rgba(17,27,53,.97));
-  border-color:rgba(146,114,255,.24);
-}
-.cometIcon { font-size:30px; margin-bottom:10px; }
-.cometQuestion {
-  font-family:'Space Grotesk',sans-serif;
-  font-size:19px;
-  line-height:1.4;
-  margin:8px 0 15px;
-}
-.cometMeta { color:var(--muted); font-size:11px; margin-bottom:12px; }
-.smallText { color:var(--muted); font-size:12px; line-height:1.6; }
-.savedAnswer {
-  display:none;
-  padding:12px;
-  margin-top:12px;
-  border-radius:11px;
-  background:rgba(141,232,192,.08);
-  border:1px solid rgba(141,232,192,.15);
-  color:#b7f4d9;
-  font-size:12px;
-  line-height:1.5;
-  overflow-wrap:anywhere;
-}
-.quickGrid {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:11px;
-}
-.quickItem {
-  min-height:110px;
-  text-align:left;
-  padding:16px;
-  border:1px solid var(--border);
-  border-radius:16px;
-  color:var(--text);
-  background:rgba(17,24,43,.9);
-}
-.quickItem .emoji { font-size:25px; display:block; margin-bottom:10px; }
-.quickItem strong { display:block; font-size:13px; }
-.quickItem span:last-child { color:var(--muted); font-size:11px; }
-.statusBanner {
-  padding:12px 14px;
-  border:1px solid rgba(255,190,100,.2);
-  background:rgba(255,190,100,.07);
-  color:#ffd69a;
-  border-radius:12px;
-  font-size:12px;
-  line-height:1.5;
-  margin-bottom:15px;
-}
-.emptyIcon {
-  font-size:42px;
-  margin-bottom:12px;
-}
-.emptyState { text-align:center; padding:32px 18px; }
-.emptyState p {
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.65;
-  max-width:390px;
-  margin:9px auto 0;
-}
-.profileIcon {
-  width:76px;
-  height:76px;
-  margin:0 auto 13px;
-  display:grid;
-  place-items:center;
-  font-size:38px;
-  border-radius:50%;
-  background:linear-gradient(140deg,#6546c9,#267cbd);
-}
-.accountCard { text-align:center; }
-.accountCard p { color:var(--muted); font-size:13px; }
-.accountInfo {
-  text-align:left;
-  margin:20px 0;
-  padding:14px;
-  border-radius:12px;
-  background:#090f20;
-  overflow-wrap:anywhere;
-}
-.accountInfo div { margin:10px 0; font-size:13px; }
-.accountInfo strong { color:#b8a7ff; }
-.bottomNav {
-  position:fixed;
-  bottom:0;
-  left:0;
-  right:0;
-  z-index:20;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  padding:9px 4px calc(9px + env(safe-area-inset-bottom));
-  background:rgba(8,11,24,.96);
-  border-top:1px solid var(--border);
-  backdrop-filter:blur(16px);
-}
-.navBtn {
-  border:0;
-  background:transparent;
-  color:#77819e;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:4px;
-  font-size:10px;
-  padding:5px 1px;
-}
-.navBtn .navIcon { font-size:20px; }
-.navBtn.active { color:#bcaaff; }
-.logout {
-  width:100%;
-  padding:13px;
-  border:1px solid rgba(255,110,130,.3);
-  border-radius:11px;
-  color:#ff9eae;
-  background:rgba(255,80,110,.08);
-  font-weight:700;
-  margin-top:12px;
-}
-footer {
-  position:relative;
-  z-index:1;
-  text-align:center;
-  padding:10px 20px 35px;
-  color:#66708e;
-  font-size:11px;
-}
-.hidden { display:none !important; }
-@media(max-width:390px) {
-  header { padding:15px 5%; }
-  .logo { font-size:21px; }
-  .headerRight { font-size:9px; }
-  .card { padding:17px; }
-  h1 { font-size:27px; }
-  .ship { font-size:43px; }
-}
+:root{color-scheme:dark;--bg:#050611;--panel:rgba(13,13,39,.86);--panel2:#171638;--text:#f6f2ff;--muted:#aaa4ca;--line:rgba(174,145,255,.22);--purple:#a879ff;--blue:#55caff;--pink:#e18cff;--green:#23e5a2;--nav:rgba(8,7,27,.94);--shadow:0 18px 55px rgba(0,0,0,.4)}
+[data-theme="light"]{color-scheme:light;--bg:#eef0fb;--panel:rgba(255,255,255,.91);--panel2:#e9eafd;--text:#19152f;--muted:#696486;--line:rgba(75,55,130,.18);--purple:#7950e8;--blue:#168bc4;--pink:#a64cc9;--green:#168b69;--nav:rgba(248,248,255,.94);--shadow:0 18px 45px rgba(48,34,100,.13)}
+[data-theme="cosmic"]{--bg:#08051c;--panel:rgba(25,13,57,.88);--panel2:#28175a;--text:#fff8ff;--muted:#c0afd9;--line:rgba(194,143,255,.27);--purple:#c080ff;--blue:#55ddff;--pink:#ff8de2;--green:#6ceac0;--nav:rgba(12,6,33,.95)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;padding-top:80px;background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:wait}
+#space{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 85% 28%,rgba(73,49,188,.3),transparent 42%),radial-gradient(ellipse at 20% 75%,rgba(26,91,170,.16),transparent 45%),linear-gradient(145deg,#03040e,#090821 55%,#050611)}
+#space:before{content:"";position:absolute;width:380px;height:380px;border-radius:50%;right:-190px;top:145px;background:radial-gradient(circle at 30% 28%,#a7c7ff,#5d57d6 28%,#17154c 62%,transparent 70%);box-shadow:0 0 55px #614cff,0 0 130px #3422c9;opacity:.8}
+#space:after{content:"";position:absolute;inset:0;background-image:radial-gradient(1px 1px at 8% 18%,#fff 98%,transparent),radial-gradient(1px 1px at 33% 44%,#d8d1ff 98%,transparent),radial-gradient(1.5px 1.5px at 70% 12%,#fff 98%,transparent),radial-gradient(1px 1px at 86% 65%,#c4b5ff 98%,transparent),radial-gradient(1px 1px at 45% 82%,#fff 98%,transparent);background-size:270px 250px;opacity:.7}
+header{position:fixed;top:0;left:0;right:0;z-index:30;width:100%;height:80px;margin:0;padding:10px max(3%,calc((100% - 1100px)/2));display:flex;align-items:center;justify-content:space-between;background:var(--bg);border-bottom:1px solid var(--line);box-shadow:0 8px 24px rgba(0,0,0,.12);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.brand{display:flex;align-items:center;gap:12px}.brandMark{width:58px;height:58px;filter:drop-shadow(0 0 12px #865cff)}.brandWords{font:700 29px "Space Grotesk";letter-spacing:5px;background:linear-gradient(90deg,#fff,#d2b7ff,#8cdfff);color:transparent;background-clip:text}.tagline{font-size:11px;color:#c5b9e6;margin-top:-2px}.headActions{display:flex;gap:10px}.round{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:rgba(24,18,61,.75);color:white;font-size:19px;box-shadow:0 0 22px rgba(123,80,255,.13)}
+main{width:min(1050px,92%);margin:20px auto 125px;position:relative;z-index:1}.authMain{width:min(440px,92%);margin:35px auto 70px}
+.page{display:none}.page.active{display:block}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:25px;padding:20px;box-shadow:var(--shadow);backdrop-filter:blur(18px);margin-bottom:17px}
+.intro{text-align:center;margin:18px 0 24px}.intro h1{font:700 34px "Space Grotesk";margin:8px 0}.eyebrow{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple)}.muted{color:var(--muted);font-size:13px;line-height:1.6}
+.tabs{display:flex;gap:7px;padding:5px;background:var(--panel2);border-radius:13px;margin-bottom:18px}.tabs button{flex:1;padding:11px;border:0;border-radius:10px;background:transparent;color:var(--muted);font-weight:700}.tabs button.active{background:linear-gradient(100deg,#8753e9,#4d7be8);color:white}
+.field{margin-bottom:14px}label{display:block;font-size:11px;letter-spacing:.7px;color:var(--muted);font-weight:700;margin-bottom:7px}input,select,textarea{width:100%;padding:13px;border-radius:13px;border:1px solid var(--line);background:rgba(8,8,29,.75);color:var(--text);outline:none}select option{background:#171638;color:white}textarea{min-height:100px;resize:vertical}
+.primary,.secondary,.danger{width:100%;border-radius:14px;padding:14px 16px;font-weight:800}.primary{border:1px solid rgba(255,255,255,.35);color:white;background:linear-gradient(100deg,#a04dff,#5c5df5 60%,#8a68ff);box-shadow:0 0 25px rgba(126,74,255,.35)}.secondary{border:1px solid var(--line);background:var(--panel2);color:var(--text)}.danger{border:1px solid rgba(255,100,130,.3);background:rgba(255,70,100,.1);color:#ff9eae}
+.textButton{border:0;background:transparent;color:var(--purple);font-size:12px;font-weight:700;padding:12px 0}.message{display:none;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);font-size:12px;line-height:1.5;margin-bottom:13px}.message.show{display:block}.hidden{display:none!important}#authMain,#setupView{display:none}
+.hero{min-height:360px;position:relative;overflow:hidden;border:0;background:radial-gradient(ellipse at 85% 75%,rgba(112,59,255,.5),transparent 40%),linear-gradient(110deg,rgba(5,5,20,.18),rgba(10,8,35,.25));padding:48px 24px 22px}
+.hero:before{content:"";position:absolute;width:440px;height:440px;border-radius:50%;right:-115px;top:-70px;border:2px solid rgba(151,130,255,.6);background:radial-gradient(circle at 30% 28%,#c3d9ff 0,#4c58c8 15%,#16154c 48%,#07071d 70%);box-shadow:inset -35px -20px 60px #050515,0 0 50px #654cff,0 0 120px rgba(83,64,255,.6)}
+.hero:after{content:"";position:absolute;width:570px;height:110px;right:-150px;top:145px;border:2px solid rgba(180,139,255,.75);border-radius:50%;transform:rotate(-25deg);box-shadow:0 0 18px #8d65ff}
+.heroContent{position:relative;z-index:2;max-width:70%}.welcome{font-size:18px;color:#d8d1ef}.hero h1{font:700 clamp(34px,7vw,58px) "Space Grotesk";letter-spacing:-2px;margin:5px 0 8px;overflow-wrap:anywhere}.hero p{font-size:17px;color:#d1c7eb;margin:0}.composer{display:flex;align-items:center;gap:12px;margin-top:48px;padding:13px 16px;border:1px solid rgba(177,147,255,.35);border-radius:40px;background:rgba(17,12,52,.78);color:#d7cafa;max-width:410px;box-shadow:0 0 25px rgba(114,67,255,.22)}.composer button{margin-left:auto;width:43px;height:43px;border-radius:50%;border:1px solid #b18aff;background:#1b1551;color:white;font-size:24px}
+.shortcutGrid{display:flex;gap:10px;margin:22px 0 28px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}.shortcutGrid::-webkit-scrollbar{display:none}.shortcut{flex:1 0 120px;min-width:0;min-height:104px;border:1px solid var(--line);border-radius:22px;background:var(--panel);color:var(--text);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:12px;box-shadow:0 8px 25px rgba(0,0,0,.2)}.shortcut .symbol{display:grid;place-items:center;color:#c3a0ff}.uiIcon{width:22px;height:22px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}.shortcut .uiIcon{width:24px;height:24px;filter:drop-shadow(0 0 5px rgba(133,84,255,.35))}.sectionHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:28px 4px 13px}.sectionHead h2{font:700 23px "Space Grotesk";margin:0}.sectionHead span{font-size:11px;color:#b99cff}
+.explorePanel{border:1px solid #9b67ff;box-shadow:0 0 28px rgba(121,66,255,.18),var(--shadow);background:linear-gradient(145deg,rgba(25,17,69,.96),rgba(8,9,31,.94));padding:23px}
+.exploreTitle{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}.exploreTitle h2{font:700 26px "Space Grotesk";margin:0}.filterRow{display:flex;align-items:center;gap:12px;min-width:0;flex-wrap:wrap;padding:14px;border:1px solid rgba(170,145,255,.16);border-radius:17px;background:rgba(10,9,36,.6);margin:10px 0;color:#d9d0f3}.filterRow .filterIcon{display:inline-flex;color:#c19aff}.filterRow .filterIcon .uiIcon{width:21px;height:21px}.filterRow select{margin-left:auto;width:auto;min-width:0;max-width:58%;padding:7px 8px;border:0;background:transparent;text-align:right;font-weight:700}.filterRow select option{background:#171638}.exploreStart{margin-top:14px;border-radius:40px}
+.profileCards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.profilePlaceholder{height:190px;border:1px solid var(--line);border-radius:19px;background:linear-gradient(145deg,rgba(76,48,142,.55),rgba(8,12,38,.9));display:flex;align-items:center;justify-content:center;color:#bba3ff}.profilePlaceholder .uiIcon{width:30px;height:30px;opacity:.8}
+.empty{text-align:center;padding:32px 20px}.emptyOrb{display:flex;justify-content:center;color:#c29aff}.emptyOrb .uiIcon{width:30px;height:30px;filter:drop-shadow(0 0 8px rgba(134,92,255,.5))}.empty h2{font:700 21px "Space Grotesk";margin:10px}.empty p{color:var(--muted);font-size:13px;line-height:1.65;max-width:440px;margin:8px auto}
+.bottomNav{position:fixed;z-index:20;left:50%;bottom:max(9px,env(safe-area-inset-bottom));transform:translateX(-50%);width:min(670px,96%);display:grid;grid-template-columns:repeat(6,1fr);align-items:center;padding:9px 10px;border:1px solid rgba(177,139,255,.32);border-radius:30px;background:var(--nav);backdrop-filter:blur(22px);box-shadow:0 0 35px rgba(90,54,220,.2)}
+.navBtn{border:0;background:transparent;color:#aaa1ce;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;padding:5px 0}.navBtn .navIcon{display:grid;place-items:center}.navBtn .navIcon .uiIcon{width:22px;height:22px}.navBtn.active{color:#c18cff;text-shadow:0 0 12px #a66bff}
+.rangeWrap{padding:15px;border:1px solid rgba(170,145,255,.18);border-radius:17px;background:rgba(10,9,36,.58);margin:10px 0}.rangeValues{display:flex;justify-content:space-between;gap:12px;font-weight:800;color:#d9c8ff;margin-bottom:10px}.rangeControls{position:relative;height:30px;display:flex;align-items:center}.rangeTrack{height:6px;width:100%;border-radius:10px;background:linear-gradient(90deg,#a04dff,#55caff);position:absolute}.rangeControls input[type=range]{position:absolute;left:0;top:0;margin:0;padding:0;width:100%;height:30px;background:transparent;border:0;pointer-events:none;appearance:none;-webkit-appearance:none}.rangeControls input[type=range]::-webkit-slider-thumb{pointer-events:auto;appearance:none;-webkit-appearance:none;width:19px;height:19px;border-radius:50%;background:#fff;border:4px solid #9461ff;box-shadow:0 0 12px #9461ff}.rangeControls input[type=range]::-moz-range-thumb{pointer-events:auto;width:12px;height:12px;border-radius:50%;background:#fff;border:4px solid #9461ff;box-shadow:0 0 12px #9461ff}.rangeControls input[type=range]::-webkit-slider-runnable-track{background:transparent}.rangeControls input[type=range]::-moz-range-track{background:transparent}.rangeHelp{font-size:11px;color:var(--muted);line-height:1.5}.uploadStatus{font-size:12px;line-height:1.5;margin-top:8px;color:var(--muted);min-height:18px}.profileLayout{display:grid;grid-template-columns:280px 1fr;gap:16px}.identity{text-align:center}.photoFrame{width:120px;height:120px;margin:0 auto 14px;border-radius:38px;border:2px solid #b18aff;overflow:hidden;background:radial-gradient(circle at 30% 25%,#bca4ff,#5b43b7 60%,#161744);display:grid;place-items:center;box-shadow:0 0 25px rgba(153,103,255,.4)}.photoFrame img{width:100%;height:100%;object-fit:cover}.photoFallback{font-size:45px;color:#fff}.infoRow{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.infoRow span{color:var(--muted)}.profileActions{display:grid;gap:10px}.photoHint{font-size:11px;color:var(--muted);line-height:1.5;margin-top:8px}
+.modalBackdrop{display:none;position:fixed;inset:0;z-index:40;background:rgba(2,2,12,.76);backdrop-filter:blur(9px);align-items:center;justify-content:center;padding:18px}.modalBackdrop.open{display:flex}.modal{width:min(440px,100%);max-height:85vh;overflow:auto;border:1px solid var(--line);border-radius:23px;padding:22px;background:#11102f;box-shadow:var(--shadow)}.modalHead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.modalHead h2{font:700 21px "Space Grotesk";margin:0}.close{border:1px solid var(--line);background:var(--panel2);color:white;border-radius:10px;width:35px;height:35px;font-size:20px}
+.themeGrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.themeChoice{padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);text-align:left}.themeChoice.selected{border-color:var(--purple);box-shadow:0 0 0 2px rgba(155,124,255,.2)}
+footer{text-align:center;color:var(--muted);font-size:10px;padding:0 10px 25px}
+@media(max-width:650px){body{padding-top:76px}header{height:76px;padding:8px 3%}.brandMark{width:50px;height:50px}.brandWords{font-size:25px}.hero{min-height:370px;padding:55px 18px 20px}.hero:before{width:340px;height:340px;right:-145px;top:-5px}.hero:after{right:-210px;top:145px}.heroContent{max-width:88%}.hero h1{font-size:clamp(32px,9vw,48px)}.hero p{font-size:15px}.composer{margin-top:45px}.shortcutGrid{gap:7px}.shortcut{min-height:105px;border-radius:17px;font-size:10px}.shortcut .symbol .uiIcon{width:23px;height:23px}.explorePanel{padding:17px}.exploreTitle h2{font-size:23px}.profileCards{gap:8px}.profilePlaceholder{height:140px}.profileLayout{grid-template-columns:1fr}.bottomNav{padding:8px 5px}.navBtn .navIcon .uiIcon{width:21px;height:21px}.shortcutGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.shortcut{min-width:0;padding:12px 4px;font-size:11px}.filterRow{gap:9px}.filterRow>span:nth-child(2){flex:1;min-width:105px}.filterRow select{max-width:48%;font-size:12px}.heroContent{max-width:100%}.composer{max-width:100%;font-size:14px}}
+@media(max-width:370px){.shortcutGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.shortcut:last-child{grid-column:1/-1}.shortcut{min-height:88px}.filterRow select{max-width:100%;flex:1 1 100%;text-align:left;margin-left:31px}.brandWords{font-size:21px}.tagline{font-size:9px}.round{width:40px;height:40px}.hero{min-height:350px}.shortcut{min-height:95px}.shortcut .symbol .uiIcon{width:22px;height:22px}.navBtn{font-size:9px}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
+
+/* ORBIT v6 communication + voyage front-end */
+.voyageCard{position:relative;overflow:hidden;background:radial-gradient(ellipse at 80% 10%,rgba(111,75,255,.3),transparent 48%),linear-gradient(135deg,rgba(16,15,52,.96),rgba(7,12,35,.96));border:1px solid rgba(143,116,255,.4)}
+.voyageVisual{height:150px;position:relative;overflow:hidden;border-radius:18px;margin:14px 0;background:radial-gradient(ellipse at 70% 55%,rgba(93,75,210,.35),transparent 45%),linear-gradient(120deg,#080b24,#171044 55%,#080b20)}
+.voyagePlanet{position:absolute;width:105px;height:105px;border-radius:50%;right:14%;top:25px;background:radial-gradient(circle at 30% 25%,#b7d8ff,#7162db 35%,#24205f 70%);box-shadow:0 0 30px #6555dc,0 0 70px rgba(104,76,255,.55)}
+.voyageShip{position:absolute;left:12%;top:54px;font-size:27px;filter:drop-shadow(0 0 12px #9d82ff);transition:left 1.1s ease,top 1.1s ease;z-index:2}
+.voyagePath{position:absolute;left:13%;right:24%;top:76px;border-top:1px dashed rgba(185,163,255,.75);transform:rotate(-8deg)}
+.voyageStars{position:absolute;inset:0;background-image:radial-gradient(2px 2px at 15% 20%,#fff 90%,transparent),radial-gradient(1px 1px at 45% 72%,#fff 90%,transparent),radial-gradient(2px 2px at 82% 18%,#d7caff 90%,transparent),radial-gradient(1px 1px at 58% 25%,#fff 90%,transparent);background-size:150px 110px;opacity:.8}
+.voyageVisual.launched .voyageShip{left:72%;top:30px}
+.voyageStatus{font-size:12px;color:var(--muted);min-height:20px;margin:8px 0}
+.chatPreview{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:rgba(7,8,29,.48)}
+.chatTop{padding:14px 16px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.chatAvatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#8755ed,#3f9bdc);color:white;font-weight:800}
+.chatMessages{min-height:170px;max-height:280px;overflow:auto;padding:15px;display:flex;flex-direction:column;gap:10px}
+.chatHint{text-align:center;color:var(--muted);font-size:11px;margin:auto;line-height:1.5}
+.chatBubble{align-self:flex-end;max-width:82%;padding:10px 13px;border-radius:16px 16px 4px 16px;background:linear-gradient(120deg,#754bd4,#435bc2);color:white;font-size:13px;overflow-wrap:anywhere}
+.chatBubble.received{align-self:flex-start;border-radius:16px 16px 16px 4px;background:var(--panel2);color:var(--text)}
+.chatBubble img{display:block;max-width:190px;max-height:190px;border-radius:10px;margin-top:5px}
+.chatBubble audio{max-width:220px;width:100%;height:36px}
+.chatComposer{padding:12px;border-top:1px solid var(--line);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chatComposer input[type=text]{flex:1;min-width:110px;padding:12px;border-radius:22px}
+.iconAction{width:42px;height:42px;flex:none;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--text);display:grid;place-items:center}
+.iconAction .uiIcon{width:19px;height:19px}
+.chatSend{width:44px;height:44px;flex:none;border:0;border-radius:50%;background:linear-gradient(135deg,#a04dff,#4e69e8);color:white;display:grid;place-items:center}
+.chatNotice{font-size:11px;color:var(--muted);padding:0 14px 12px;line-height:1.5}
+.recordingState{font-size:11px;color:#ff9eae;display:none;align-items:center;gap:7px;padding:0 14px 10px}.recordingState.active{display:flex}
+.recordDot{width:8px;height:8px;border-radius:50%;background:#ff647e;box-shadow:0 0 10px #ff647e}
+.previewTools{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.previewTools button{width:auto;padding:10px 13px;font-size:12px}
+@media(max-width:650px){.voyageVisual{height:135px}.chatMessages{min-height:150px}}
+
+
+/* ORBIT front-end refinement */
+.travelIntro{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:18px 0 20px}
+.travelIntro h1{font:700 34px "Space Grotesk";margin:6px 0}
+.travelBadge{font-size:10px;letter-spacing:1px;color:var(--blue);border:1px solid var(--line);padding:7px 10px;border-radius:30px;white-space:nowrap}
+.travelGrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.travelOption{border:1px solid var(--line);border-radius:16px;background:var(--panel2);color:var(--text);padding:14px;text-align:left;min-height:95px}
+.travelOption strong{display:block;margin:7px 0 3px;font-size:13px}.travelOption small{display:block;color:var(--muted);font-size:11px;line-height:1.4}
+.travelOption.selected{border-color:var(--purple);box-shadow:0 0 0 2px rgba(155,124,255,.2),0 0 20px rgba(126,74,255,.12)}
+.shipChoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.shipChoice{border:1px solid var(--line);border-radius:15px;background:var(--panel2);color:var(--text);padding:12px 6px;text-align:center}
+.shipChoice .shipArt{display:block;font-size:27px;line-height:1.5;filter:drop-shadow(0 0 8px rgba(156,124,255,.5))}
+.shipChoice small{display:block;font-size:10px;color:var(--muted)}.shipChoice.selected{border-color:var(--purple);background:rgba(116,77,210,.18)}
+.shipPreview{display:flex;align-items:center;justify-content:center;gap:12px;min-height:110px;margin:12px 0;border-radius:18px;background:radial-gradient(ellipse at center,rgba(116,87,230,.25),transparent 70%),var(--panel2);border:1px solid var(--line)}
+.shipPreview .shipArt{font-size:43px;filter:drop-shadow(0 0 14px #9d82ff)}
+.travelLaunch{margin-top:15px}.travelArrival{display:none;margin-top:15px;padding:15px;border:1px solid rgba(91,213,180,.35);border-radius:16px;background:rgba(25,150,115,.08)}.travelArrival.show{display:block}
+.travelArrival textarea{min-height:76px}.arrivalTranscript{display:flex;flex-direction:column;gap:7px;margin:10px 0}.arrivalMessage{align-self:flex-end;max-width:88%;padding:10px 13px;border-radius:14px 14px 4px 14px;background:linear-gradient(120deg,#754bd4,#435bc2);color:#fff;font-size:12px;overflow-wrap:anywhere}.travelStatus{font-size:12px;color:var(--muted);line-height:1.5;margin-top:10px;min-height:20px}
+.chatBubble .audioMessage{display:flex;align-items:center;gap:10px;min-width:190px}.audioMessage .audioMark{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);font-size:15px}.audioMessage audio{width:calc(100% - 44px);min-width:0;height:34px}
+.chatBubble img{cursor:zoom-in;max-width:min(230px,100%);max-height:230px;object-fit:cover}
+.imageViewer{position:fixed;inset:0;z-index:70;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.92)}.imageViewer.open{display:flex}.imageViewer img{max-width:100%;max-height:88vh;object-fit:contain;border-radius:12px}.imageViewer button{position:absolute;top:calc(14px + env(safe-area-inset-top));right:16px;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:#24213b;color:white;font-size:24px}
+.postComposer textarea{min-height:125px}.postComposer .field{margin-top:12px}
+[data-theme="light"] .chatPreview{background:#f7f7ff;border-color:#d8d5eb}
+[data-theme="light"] .chatTop{background:#e8e7f6;color:#201a3b}
+[data-theme="light"] .chatHint{color:#625d7d}
+[data-theme="light"] .chatComposer input[type=text]{background:#fff;color:#211b3a;border-color:#d4d0e8}
+[data-theme="light"] .chatNotice,[data-theme="light"] .recordingState{color:#625d7d}
+[data-theme="light"] .chatBubble.received{background:#e5e4f2;color:#201a3b}
+[data-theme="light"] .travelOption,[data-theme="light"] .shipChoice{background:#f0effa;color:#201a3b}
+[data-theme="light"] .shipPreview{background:#e9e8f8}
+[data-theme="light"] .voyageCard{background:linear-gradient(145deg,#f4f0ff,#e8f2ff);border-color:#cfc4ef}
+[data-theme="light"] .voyageVisual{background:linear-gradient(120deg,#dce3ff,#e7dfff 55%,#d9e8ff)}
+[data-theme="light"] .voyagePath{border-color:#7463b8}
+[data-theme="light"] .voyageStars{opacity:.3}
+@media(max-width:650px){.travelGrid{grid-template-columns:1fr 1fr}.shipChoices{gap:7px}.shipChoice{padding:10px 4px}.travelIntro h1{font-size:29px}}
+@media(max-width:370px){.travelGrid{grid-template-columns:1fr}.shipChoices{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+
+/* ORBIT refinement: clear chat controls and readable light theme */
+.chatComposer{display:flex;align-items:center;gap:8px;padding:10px;border-top:1px solid var(--line);flex-wrap:nowrap}
+.chatComposer .iconAction{width:42px;height:42px;min-width:42px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:var(--panel2);color:var(--text);padding:0}
+.chatComposer .iconAction .uiIcon{width:21px;height:21px}
+.chatComposer input[type=text]{flex:1;min-width:0;width:0;height:42px;padding:0 13px;border-radius:22px}
+.chatComposer .chatSend{width:42px;height:42px;min-width:42px;display:grid;place-items:center;border:0;border-radius:50%;background:linear-gradient(120deg,#8753e9,#4d70e8);color:#fff;padding:0}
+.chatComposer .chatSend .uiIcon{width:20px;height:20px}
+.audioMessage{display:flex;align-items:center;gap:10px;min-width:205px;max-width:260px}
+.audioMessage audio{display:none}
+.audioPlay{width:38px;height:38px;flex:none;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(120deg,#8753e9,#4d70e8);color:#fff}
+.audioPlay .uiIcon{width:17px;height:17px}
+.audioDetails{flex:1;min-width:0}.audioWave{height:27px;display:flex;align-items:center;gap:3px}.audioWave i{display:block;width:3px;min-width:2px;border-radius:5px;background:currentColor;opacity:.72;flex:1}.audioTime{display:block;font-size:10px;opacity:.78;margin-top:3px}
+[data-theme="light"] .chatPreview{background:#fff;border-color:#c9c4df;color:#211b38}
+[data-theme="light"] .chatTop{background:#e5e2f3;color:#211b38;border-bottom:1px solid #d1cce5}
+[data-theme="light"] .chatTop .muted,[data-theme="light"] .chatHint,[data-theme="light"] .chatNotice,[data-theme="light"] .recordingState{color:#51496d!important}
+[data-theme="light"] .chatMessages{background:#fbfaff;color:#211b38}
+[data-theme="light"] .chatBubble{background:#eeeafa;color:#211b38;border:1px solid #d9d3ed}
+[data-theme="light"] .chatBubble.received{background:#e7e4f2;color:#211b38}
+[data-theme="light"] .chatComposer{background:#fff;border-color:#d6d1e8}
+[data-theme="light"] .chatComposer .iconAction{background:#f0edfa;color:#493b70;border-color:#c9c1e1}
+[data-theme="light"] .chatComposer input[type=text]{background:#fff!important;color:#211b38!important;border:1px solid #c9c1e1!important}
+[data-theme="light"] .chatComposer input::placeholder{color:#716987;opacity:1}
+[data-theme="light"] .travelOption{background:#fff;color:#211b38;border-color:#d2cce6}
+[data-theme="light"] .travelOption small{color:#5d5577}
+[data-theme="light"] .shipPreview{background:#f1effb;color:#211b38}
+[data-theme="light"] .travelStatus{color:#51496d}
+[data-theme="light"] .photoHint{color:#5d5577}
+
+
+/* Drift, toast feedback and compact responsive controls */
+.orbitToast{position:fixed;z-index:100;left:50%;bottom:calc(94px + env(safe-area-inset-bottom));transform:translate(-50%,18px);opacity:0;pointer-events:none;max-width:min(90%,440px);padding:12px 17px;border:1px solid var(--line);border-radius:14px;background:var(--panel2);color:var(--text);box-shadow:var(--shadow);font-size:13px;transition:opacity .22s,transform .22s}.orbitToast.show{opacity:1;transform:translate(-50%,0)}
+.driftHome{display:flex;align-items:center;gap:16px;background:radial-gradient(ellipse at 12% 50%,rgba(132,91,255,.24),transparent 60%),var(--panel)}.driftHome h3{margin:0 0 5px;font:700 19px 'Space Grotesk'}.driftHome p{margin:0 0 12px}.driftHome .primary{max-width:190px}.driftMiniRocket{font-size:42px;filter:drop-shadow(0 0 12px #9b78ff);animation:rocketFloat 2.6s ease-in-out infinite}@keyframes rocketFloat{50%{transform:translateY(-7px) rotate(-7deg)}}
+.driftHeader,.driftAnon{display:flex;align-items:center;gap:12px;margin-bottom:15px}.driftOrb,.anonAvatar{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:var(--panel2);color:var(--purple);font-size:22px;border:1px solid var(--line)}.driftComposeCard textarea{min-height:125px}.driftMeta{display:flex;justify-content:space-between;gap:10px;color:var(--muted);font-size:10px;margin:7px 2px 13px}.driftLaunchBtn{display:flex;justify-content:center;align-items:center;gap:9px}.driftLaunchStage{height:105px;position:relative;overflow:hidden;margin-top:14px;border-radius:16px;background:radial-gradient(ellipse at 75% 45%,rgba(105,76,220,.25),transparent 45%),linear-gradient(110deg,#08091e,#15103c);display:flex;align-items:flex-end;justify-content:center;padding:10px;color:#d8cff8;font-size:11px}.driftRocket{position:absolute;left:12%;top:20px;display:flex;align-items:center;gap:3px;font-size:27px;opacity:.85;transform:rotate(35deg);white-space:nowrap}.rocketPayload{display:inline-block;max-width:115px;overflow:hidden;text-overflow:ellipsis;padding:4px 7px;border:1px solid rgba(196,171,255,.65);border-radius:7px;background:rgba(29,22,75,.9);color:#fff;font:600 8px/1.2 "DM Sans",sans-serif;box-shadow:0 0 10px rgba(159,123,255,.4)}.driftTrail{position:absolute;left:0;top:57px;width:0;height:2px;background:linear-gradient(90deg,transparent,#a98aff,#6ddaff);box-shadow:0 0 12px #a98aff}.driftLaunchStage.fired .driftRocket{animation:driftFlight 1.35s cubic-bezier(.2,.7,.3,1) forwards}.driftLaunchStage.fired .driftTrail{animation:driftTrail 1.2s ease-out forwards}@keyframes driftFlight{0%{left:12%;top:20px;opacity:1}100%{left:88%;top:-30px;opacity:0}}@keyframes driftTrail{0%{width:0;left:10%}100%{width:78%;left:10%}}.driftLaunchStage p{position:relative;z-index:2;margin:0;text-align:center}.driftAnon{margin:0}.anonAvatar{background:linear-gradient(135deg,#7751d7,#3c78bd);color:#fff}.anonTag{margin-left:auto;font-size:9px;letter-spacing:1px;color:var(--purple);border:1px solid var(--line);border-radius:20px;padding:6px 8px}.driftSample{font:500 19px/1.5 'Space Grotesk';padding:20px 5px;margin:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.driftActions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.driftDiscovery textarea{min-height:90px}.driftDiscovery #driftReplyArea .primary{margin-top:8px}
+.chatComposer{flex-wrap:nowrap!important;gap:7px}.chatComposer input[type=text]{flex:1 1 0;min-width:0;width:0;padding:11px 10px}.chatComposer .iconAction{width:39px;min-width:39px;height:39px}.chatComposer .chatSend{width:41px;min-width:41px;height:41px}
+[data-theme="light"] .driftLaunchStage{background:linear-gradient(110deg,#e6e9ff,#eee6ff);color:#3b315f}.bottomNav{grid-template-columns:repeat(6,minmax(0,1fr))}.navBtn{font-size:10px}
+@media(max-width:370px){.navBtn{font-size:8px}.navBtn .navIcon .uiIcon{width:19px;height:19px}.driftHome{align-items:flex-start}.driftMiniRocket{font-size:32px}}
+
 </style>
 </head>
-
 <body>
-<div class="stars"></div>
-<div class="glow"></div>
-
+<div id="space"></div>
+<svg class="iconLibrary" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <symbol id="oi-mic" viewBox="0 0 24 24"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3M9 21h6"/></symbol>
+  <symbol id="oi-image" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m21 15-5-5L5 20"/></symbol>
+  <symbol id="oi-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7z"/></symbol>
+  <symbol id="oi-pause" viewBox="0 0 24 24"><path d="M8 5h3v14H8zM15 5h3v14h-3z"/></symbol>
+  <symbol id="oi-home" viewBox="0 0 24 24"><path d="m3.5 10 8.5-7 8.5 7v10a1 1 0 0 1-1 1h-5.5v-6.5h-4V21H4.5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="oi-explore" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.8 8.2-2.5 5.1-5.1 2.5 2.5-5.1z"/></symbol>
+  <symbol id="oi-create" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+  <symbol id="oi-messages" viewBox="0 0 24 24"><path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-3.5 2v-5A7.5 7.5 0 1 1 20 11.5Z"/><path d="M8 11.5h.01M12 11.5h.01M16 11.5h.01"/></symbol>
+  <symbol id="oi-profile" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M4.5 21a7.5 7.5 0 0 1 15 0"/></symbol>
+  <symbol id="oi-companions" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9" r="2.5"/><path d="M2.8 20a6.2 6.2 0 0 1 12.4 0M15 15a5 5 0 0 1 6.2 4.8"/></symbol>
+  <symbol id="oi-galaxies" viewBox="0 0 24 24"><path d="M4 15.5c2.2-5.2 8.2-8.8 14.5-7.3M5 7.5c4.3-3.1 10.7-2.7 14.3 1.2M4.5 18.5c4.5 2.7 10.8 1.6 14-2.7"/><circle cx="12" cy="12" r="2.2"/><circle cx="19.5" cy="5" r="1"/></symbol>
+  <symbol id="oi-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="12" r="1.5"/></symbol>
+  <symbol id="oi-interests" viewBox="0 0 24 24"><path d="M12 3.5 14.2 9l5.8 2.2-5.8 2.1-2.2 5.7-2.1-5.7L4 11.2 9.9 9z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9z"/></symbol>
+  <symbol id="oi-comet" viewBox="0 0 24 24"><path d="M17.5 4.5a5.7 5.7 0 0 0-8 8L4 18l2 2 5.5-5.5a5.7 5.7 0 0 0 8-8Z"/><path d="m3 8 4 1M8 3l1 4M3 15l3-1"/></symbol>
+  <symbol id="oi-theme" viewBox="0 0 24 24"><path d="M20 15.2A8.5 8.5 0 0 1 8.8 4 8.7 8.7 0 1 0 20 15.2Z"/><path d="M16.5 3v4M14.5 5h4"/></symbol>
+  <symbol id="oi-send" viewBox="0 0 24 24"><path d="m4 12 16-8-5.5 16-3.2-6.2zM11.3 13.8 20 4"/></symbol>
+  <symbol id="oi-orbit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-28 12 12)"/></symbol>
+</svg>
 <header>
-  <div class="logo">ORBIT</div>
-  <div class="headerRight" id="headerStatus">✦ YOUR UNIVERSE AWAITS</div>
+  <div class="brand">
+    <svg class="brandMark" viewBox="0 0 80 80" fill="none" aria-label="ORBIT planet logo"><defs><radialGradient id="planet"><stop stop-color="#b9a2ff"/><stop offset=".55" stop-color="#6749d8"/><stop offset="1" stop-color="#15143d"/></radialGradient></defs><circle cx="40" cy="39" r="23" fill="url(#planet)" stroke="#a88aff" stroke-width="1.5"/><ellipse cx="40" cy="40" rx="37" ry="12" transform="rotate(-25 40 40)" stroke="#b48cff" stroke-width="4"/><path d="M22 47c11 7 26 6 37-3" stroke="#e3caff" stroke-width="2" opacity=".8"/></svg>
+    <div><div class="brandWords">ORBIT</div><div class="tagline">Connect Beyond Worlds</div></div>
+  </div>
+  <div class="headActions"><button class="round" id="openThemes" aria-label="Themes"><svg class="uiIcon"><use href="#oi-theme"/></svg></button></div>
 </header>
 
 <main id="authMain" class="authMain">
-  <section id="authView">
-    <div class="intro">
-      <span class="planet">🪐</span>
-      <h1>Find your orbit.</h1>
-      <div class="subtitle">A universe full of possibilities.</div>
-    </div>
-
-    <div class="card">
-      <div class="tabs">
-        <button id="loginTab" class="active" type="button">Login</button>
-        <button id="signupTab" type="button">Create account</button>
-      </div>
-
-      <div id="authMessage" class="message"></div>
-
-      <form id="authForm">
-        <div id="callsignField" class="field hidden">
-          <label for="callsign">YOUR CALLSIGN</label>
-          <input id="callsign" type="text" maxlength="20"
-            placeholder="e.g. NovaExplorer" autocomplete="nickname">
-        </div>
-
-        <div id="ageField" class="field hidden">
-          <label for="ageGroup">AGE GROUP</label>
-          <select id="ageGroup">
-            <option value="">Choose your age group</option>
-            <option value="13-17">13–17</option>
-            <option value="18+">18+</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="email">EMAIL ADDRESS</label>
-          <input id="email" type="email" placeholder="you@example.com"
-            autocomplete="email" required>
-        </div>
-
-        <div class="field">
-          <label for="password">PASSWORD</label>
-          <input id="password" type="password"
-            placeholder="At least 6 characters"
-            minlength="6" autocomplete="current-password" required>
-        </div>
-
-        <button id="submitBtn" class="primary" type="submit">
-          Login to ORBIT
-        </button>
-      </form>
-
-      <button id="forgotBtn" type="button" class="secondary"
-        style="margin-top:12px;background:transparent;border:0;color:#b8a7ff;font-size:12px">
-        Forgot password?
-      </button>
-
-      <div class="separator">OR</div>
-
-      <button id="googleBtn" class="google" type="button">
-        <span>G</span> Continue with Google
-      </button>
-
-      <div class="note">
-        Your email and private account details are not public.
-        Age groups are self-declared and are not identity verification.
-        Social discovery is not enabled in this version.
-      </div>
-    </div>
-  </section>
+<section id="authView">
+  <div class="intro"><div class="eyebrow">A NEW CONNECTION AWAITS</div><h1>Find your orbit.</h1><div class="muted">A universe full of possibilities.</div></div>
+  <div class="card">
+    <div class="tabs"><button id="loginTab" class="active" type="button">Login</button><button id="signupTab" type="button">Create account</button></div>
+    <div id="authMessage" class="message"></div>
+    <form id="authForm">
+      <div id="callsignField" class="field hidden"><label for="callsign">YOUR CALLSIGN</label><input id="callsign" maxlength="20" placeholder="e.g. NovaExplorer" autocomplete="nickname"></div>
+      <div id="dobField" class="field hidden"><label for="dateOfBirth">DATE OF BIRTH</label><input id="dateOfBirth" type="date" autocomplete="bday"><div class="photoHint">You must be at least 15 to join. Your date of birth is private and is not identity verification.</div></div>
+      <div class="field"><label for="email">EMAIL ADDRESS</label><input id="email" type="email" required autocomplete="email" placeholder="you@example.com"></div>
+      <div class="field"><label for="password">PASSWORD</label><input id="password" type="password" minlength="6" required autocomplete="current-password" placeholder="At least 6 characters"></div>
+      <button id="submitBtn" class="primary" type="submit">Login to ORBIT</button>
+    </form>
+    <button id="forgotBtn" class="textButton" type="button">Forgot password?</button>
+    <button id="googleBtn" class="secondary" type="button" style="margin-top:8px">Continue with Google</button>
+    <p class="photoHint">Profile photos are optional. Age groups are self-declared, not identity verification. Social discovery and messaging are not active yet.</p>
+  </div>
+</section>
 </main>
 
 <main id="appView" style="display:none">
-  <div id="verificationBanner" class="statusBanner hidden"></div>
-
-  <section id="homePage" class="page active">
-    <div class="card welcome">
-      <div class="welcomeTop">
-        <div class="welcomeText">
-          <div class="eyebrow">WELCOME BACK, ALIEN</div>
-          <h1 id="homeGreeting">Your orbit awaits.</h1>
-          <p>Your universe is yours to explore.</p>
-        </div>
-        <div class="ship">🚀</div>
-      </div>
-    </div>
-
-    <div class="sectionTitle">
-      <h2>Comet of the Day</h2>
-      <span>✦ DAILY TRANSMISSION</span>
-    </div>
-
-    <div class="card cometCard">
-      <div class="cometIcon">☄️</div>
-      <div class="eyebrow">TODAY'S QUESTION</div>
-      <div id="cometQuestion" class="cometQuestion"></div>
-      <div class="cometMeta">Your answer is private in this first version.</div>
-
-      <form id="cometForm">
-        <div class="field">
-          <textarea id="cometAnswer" maxlength="500"
-            placeholder="Send your answer into the universe..."
-            required></textarea>
-        </div>
-        <button id="cometSubmit" class="primary" type="submit">
-          Save my answer
-        </button>
-      </form>
-
-      <div id="savedAnswer" class="savedAnswer"></div>
-    </div>
-
-    <div class="sectionTitle">
-      <h2>Your universe</h2>
-      <span>YOUR DESTINATIONS</span>
-    </div>
-
-    <div class="quickGrid">
-      <button class="quickItem" data-page="explore">
-        <span class="emoji">🌌</span>
-        <strong>Explore</strong>
-        <span>Discover new worlds</span>
-      </button>
-      <button class="quickItem" data-page="signals">
-        <span class="emoji">📡</span>
-        <strong>Signals</strong>
-        <span>Incoming connections</span>
-      </button>
-      <button class="quickItem" data-page="companions">
-        <span class="emoji">🪐</span>
-        <strong>Companions</strong>
-        <span>Your cosmic circle</span>
-      </button>
-      <button class="quickItem" data-page="profile">
-        <span class="emoji">👽</span>
-        <strong>Homeworld</strong>
-        <span>Your personal profile</span>
-      </button>
-    </div>
-  </section>
-
-  <section id="explorePage" class="page">
-    <div class="intro">
-      <span class="planet">🌌</span>
-      <h1>Explore</h1>
-      <div class="subtitle">There are worlds beyond your own.</div>
-    </div>
-    <div class="card emptyState">
-      <div class="emptyIcon">🛰️</div>
-      <h2>Preparing the galaxy</h2>
-      <p>
-        Real Alien discovery is not switched on yet.
-        We're building a separate, protected public-profile system
-        before showing anyone here.
-      </p>
-      <p><strong>No demo users. No invented profiles.</strong></p>
-    </div>
-  </section>
-
-  <section id="signalsPage" class="page">
-    <div class="intro">
-      <span class="planet">📡</span>
-      <h1>Signals</h1>
-      <div class="subtitle">First contact begins with a signal.</div>
-    </div>
-    <div class="card emptyState">
-      <div class="emptyIcon">📡</div>
-      <h2>Signal station offline</h2>
-      <p>
-        Friend requests will appear here when the secure
-        discovery and connection system is ready.
-      </p>
-      <p>No sample requests or fake notifications.</p>
-    </div>
-  </section>
-
-  <section id="companionsPage" class="page">
-    <div class="intro">
-      <span class="planet">🪐</span>
-      <h1>Companions</h1>
-      <div class="subtitle">The people in your orbit.</div>
-    </div>
-    <div class="card emptyState">
-      <div class="emptyIcon">👥</div>
-      <h2>Your crew starts here</h2>
-      <p>
-        Accepted connections will appear here after we build
-        real Signals and Companion records.
-      </p>
-      <p>Your companion list is not being filled with demo accounts.</p>
-    </div>
-  </section>
-
-  <section id="profilePage" class="page">
-    <div class="intro">
-      <span class="planet">👽</span>
-      <h1>Homeworld</h1>
-      <div class="subtitle">Your account, your corner of the universe.</div>
-    </div>
-
-    <div class="card accountCard">
-      <div class="profileIcon">👽</div>
-      <h2 id="profileCallsign">Unknown Voyager</h2>
-      <p id="profileEmail"></p>
-
-      <div class="accountInfo">
-        <div><strong>Callsign:</strong> <span id="profileCallsignInfo">—</span></div>
-        <div><strong>Age group:</strong> <span id="profileAge">—</span></div>
-        <div><strong>Email:</strong> <span id="profileStatus">—</span></div>
-        <div><strong>Account:</strong> <span id="profileAccount">—</span></div>
-      </div>
-
-      <div class="field" style="text-align:left">
-        <label for="editCallsign">CHANGE CALLSIGN</label>
-        <input id="editCallsign" type="text" maxlength="20">
-      </div>
-      <button id="saveProfile" class="secondary" type="button">
-        Save callsign
-      </button>
-
-      <button id="refreshVerification" class="secondary"
-        type="button" style="margin-top:10px">
-        I've verified my email
-      </button>
-
-      <button id="resendVerification" class="secondary"
-        type="button" style="margin-top:10px">
-        Resend verification email
-      </button>
-
-      <button id="logoutBtn" class="logout" type="button">Log out</button>
-    </div>
-  </section>
-</main>
-
-<section id="setupView" class="authMain" style="display:none">
-  <div class="intro">
-    <span class="planet">🛠️</span>
-    <h1>Finish your Homeworld</h1>
-    <div class="subtitle">We need a few details to complete your account.</div>
+<div id="verificationBanner" class="message hidden"></div>
+<section id="homePage" class="page">
+  <div class="card hero"><div class="heroContent"><div class="welcome">Welcome back,</div><h1 id="homeGreeting">Voyager</h1><p>Another universe awaits...</p><div class="composer"><svg class="uiIcon"><use href="#oi-orbit"/></svg><span>What's on your mind?</span><button id="createHero" aria-label="Create a post"><svg class="uiIcon"><use href="#oi-send"/></svg></button></div></div></div>
+  <div class="shortcutGrid" aria-label="More ORBIT spaces">
+    <button class="shortcut" data-page="companions"><span class="symbol"><svg class="uiIcon"><use href="#oi-companions"/></svg></span>Companions</button>
+    <button class="shortcut" data-page="galaxies"><span class="symbol"><svg class="uiIcon"><use href="#oi-galaxies"/></svg></span>Galaxies</button>
   </div>
-  <div class="card">
-    <div id="setupMessage" class="message"></div>
-    <form id="setupForm">
-      <div class="field">
-        <label for="setupCallsign">YOUR CALLSIGN</label>
-        <input id="setupCallsign" maxlength="20" minlength="3" required>
-      </div>
-      <div class="field">
-        <label for="setupAge">AGE GROUP</label>
-        <select id="setupAge" required>
-          <option value="">Choose your age group</option>
-          <option value="13-17">13–17</option>
-          <option value="18+">18+</option>
-        </select>
-      </div>
-      <button class="primary" type="submit">Complete my account</button>
-    </form>
-    <button id="setupLogout" class="logout" type="button">Log out</button>
+  <div class="card explorePanel">
+    <div class="exploreTitle"><div><div class="eyebrow">DISCOVER NEW WORLDS</div><h2>Explore</h2><div class="muted">Find your kind of alien...</div></div><button class="secondary" id="openFilters" style="width:auto;padding:10px 13px"><svg class="uiIcon" style="display:inline-block;width:17px;height:17px;vertical-align:-4px;margin-right:5px"><use href="#oi-filter"/></svg>Set Filters</button></div>
+    <div class="rangeWrap"><div class="rangeValues"><span>Preferred Age Range</span><strong id="homeRangeLabel">15 – 17</strong></div><div class="rangeControls"><div class="rangeTrack"></div><input id="homeAgeMin" type="range" min="15" max="17" value="15" aria-label="Minimum preferred age"><input id="homeAgeMax" type="range" min="15" max="17" value="17" aria-label="Maximum preferred age"></div><div class="rangeHelp">Your preference stays within your own age group.</div></div>
+    <div class="filterRow"><span class="filterIcon"><svg class="uiIcon"><use href="#oi-interests"/></svg></span><span>Interests</span><span style="margin-left:auto;color:var(--muted);font-size:12px">Coming soon</span></div>
+    <button class="primary exploreStart" id="startExploring"><svg class="uiIcon" style="display:inline-block;vertical-align:-5px;margin-right:7px"><use href="#oi-explore"/></svg>Start Exploring</button>
+    <p class="photoHint">Your age preference is saved privately. Discovery will only show compatible age groups when the protected matching system is ready.</p>
+  </div>
+  <div class="sectionHead"><h2>For You</h2><span>COMING SOON →</span></div>
+  <div class="profileCards"><div class="profilePlaceholder"><svg class="uiIcon"><use href="#oi-orbit"/></svg></div><div class="profilePlaceholder"><svg class="uiIcon"><use href="#oi-galaxies"/></svg></div><div class="profilePlaceholder"><svg class="uiIcon"><use href="#oi-comet"/></svg></div></div>
+  <p class="photoHint">These are decorative placeholders, not real user profiles.</p>
+  <div class="sectionHead"><h2>Travel</h2><span>NEW FRONTIER</span></div>
+  <div class="card voyageCard">
+    <div class="eyebrow">YOUR NEXT DESTINATION</div><h2 style="font:700 23px 'Space Grotesk';margin:7px 0">Send a transmission beyond your orbit.</h2>
+    <p class="muted">Choose a way to meet people anonymously.</p>
+    <div class="voyageVisual"><div class="voyageStars"></div><div class="voyagePath"></div><div class="voyageShip" aria-hidden="true">✦</div><div class="voyagePlanet"></div></div>
+    <button id="openTravel" class="primary">Open Travel</button>
+    <p class="photoHint">Each journey gets a fresh temporary name. Your real Callsign stays private during the anonymous travel preview.</p>
+  </div>
+  <div class="sectionHead"><h2>Drift</h2><span>LET A THOUGHT FIND SOMEONE</span></div>
+  <div class="card driftHome"><div class="driftMiniRocket" aria-hidden="true">🚀</div><div><h3>Send a thought into the universe.</h3><p class="muted">Someone may discover it, reply, and start a conversation with you.</p><button class="primary" id="openDrift">Open Drift</button></div></div>
+  <div class="sectionHead"><h2>Comet of the Day</h2><span>DAILY TRANSMISSION</span></div>
+  <div class="card"><div class="eyebrow">TODAY'S QUESTION</div><h3 id="cometQuestion" style="font:600 20px/1.4 'Space Grotesk'"></h3><p class="photoHint">Your answer is private and saved to your account.</p><form id="cometForm"><div class="field"><textarea id="cometAnswer" maxlength="500" required placeholder="Send your answer into the universe..."></textarea></div><button id="cometSubmit" class="primary">Save my answer</button></form><div id="savedAnswer" class="message"></div></div>
+</section>
+<section id="explorePage" class="page"><div class="intro"><div class="eyebrow">BEYOND YOUR HOMEWORLD</div><h1>Explore</h1><div class="muted">Find your kind of alien.</div></div><div class="card empty"><div class="emptyOrb"><svg class="uiIcon"><use href="#oi-explore"/></svg></div><h2>The galaxy is taking shape</h2><p>Real profile discovery will be enabled after public profiles, age matching and safety controls are ready. No demo users.</p></div></section>
+<section id="driftPage" class="page">
+  <div class="intro"><div class="eyebrow">A MESSAGE WITHOUT A DESTINATION</div><h1>Drift</h1><div class="muted">Send a random thought into the universe. See who finds it.</div></div>
+  <div class="card driftComposeCard">
+    <div class="driftHeader"><span class="driftOrb">✦</span><div><strong>Launch a Drift</strong><div class="muted">Your identity stays hidden at first.</div></div></div>
+    <label for="driftText">YOUR MESSAGE</label><textarea id="driftText" maxlength="500" placeholder="A thought, a question, a little confession, or just something random…"></textarea>
+    <div class="driftMeta"><span id="driftCount">0 / 500</span><span>Anonymous to the receiver</span></div>
+    <button id="launchDrift" class="primary driftLaunchBtn" type="button"><span>🚀</span> Launch Drift</button>
+    <div id="driftLaunchStage" class="driftLaunchStage" aria-live="polite"><div class="driftRocket" aria-hidden="true">🚀<span class="rocketPayload" id="driftPayload">Your message</span></div><div class="driftTrail"></div><p id="driftLaunchStatus">Your message is ready for launch.</p></div>
+    <div class="photoHint">Front-end preview: Drift messages are not delivered to other users until the backend and moderation system are connected.</div>
+  </div>
+  <div class="sectionHead"><h2>Discover a Drift</h2><span>YOUR NEXT CONVERSATION?</span></div>
+  <div class="card driftDiscovery" id="driftDiscovery">
+    <div class="driftAnon"><span class="anonAvatar">✦</span><div><strong>Unknown signal</strong><div class="muted">A message drifting through ORBIT</div></div><span class="anonTag">ANONYMOUS</span></div>
+    <p class="driftSample">“What's something small that made you happy recently?”</p>
+    <div class="driftActions"><button id="passDrift" class="secondary" type="button">Pass</button><button id="replyDrift" class="primary" type="button">Reply</button></div>
+    <div id="driftReplyArea" class="hidden"><label for="driftReplyText">YOUR REPLY</label><textarea id="driftReplyText" maxlength="500" placeholder="Write a reply…"></textarea><button id="sendDriftReply" class="primary" type="button">Send reply</button></div>
+    <div id="driftReplyStatus" class="photoHint" aria-live="polite">Sample card only. Real discovery will use eligible users in your protected age group.</div>
   </div>
 </section>
+<section id="travelPage" class="page">
+  <div class="travelIntro"><div><div class="eyebrow">MEET BEYOND YOUR HOMEWORLD</div><h1>Travel</h1><div class="muted">Choose how you'd like to meet people anonymously.</div></div><span class="travelBadge">ORBIT MEETS</span></div>
+  <div class="card">
+    <div class="sectionHead" style="margin:0 0 12px"><h2>Choose your journey</h2></div>
+    <div class="travelGrid" id="destinationChoices">
+      <button class="travelOption selected" type="button" data-destination="random"><span>✧</span><strong>Random 1-on-1</strong><small>Meet one randomly selected person.</small></button>
+      <button class="travelOption" type="button" data-destination="interests"><span>✦</span><strong>Shared Interests</strong><small>Meet people who share your interests.</small></button>
+      <button class="travelOption" type="button" data-destination="group"><span>◉</span><strong>Group Meet</strong><small>Join an anonymous room with more than two people.</small></button>
+    </div>
+    <div id="destinationExtra" class="field hidden" style="margin-top:14px"><label for="destinationDetail">CHOOSE AN INTEREST</label><select id="destinationDetail"><option value="">Choose an interest</option><option>Art & creativity</option><option>Gaming</option><option>Music</option><option>Football & sports</option><option>Science & space</option><option>Books & writing</option><option>Movies & TV</option></select></div>
+  </div>
+  <div class="card">
+    <div class="sectionHead" style="margin:0 0 12px"><h2>Anonymous identity</h2></div>
+    <div class="shipPreview"><span class="shipArt" aria-hidden="true">🚀</span><div><strong>Your temporary identity</strong><div class="muted">Your temporary name appears here during a meet.</div></div></div>
+    <div class="field"><label for="voyageAlias">TEMPORARY NAME</label><input id="voyageAlias" maxlength="20" autocomplete="off" placeholder="Choose a name for this session"><div class="photoHint">Your real Callsign and profile stay hidden during anonymous encounters.</div></div>
+    <div class="voyageVisual" id="voyageVisual"><div class="voyageStars"></div><div class="voyagePath"></div><div class="voyageShip" id="voyageShip" aria-hidden="true">✦</div><div class="voyagePlanet"></div></div>
+    <button id="launchVoyage" class="primary travelLaunch">Find a Meet</button>
+    <div id="voyageStatus" class="travelStatus" aria-live="polite">Your temporary identity is ready.</div>
+    <div id="travelArrival" class="travelArrival"><strong>You're ready to meet.</strong><p class="muted" id="arrivalDescription">Your temporary identity is active for this session.</p><div class="field"><label for="travelMessage">START A TRANSMISSION</label><textarea id="travelMessage" maxlength="500" placeholder="Say hello…"></textarea></div><button id="sendTravelMessage" class="secondary" type="button">Preview message</button><div id="arrivalTranscript" class="arrivalTranscript" aria-live="polite"></div><div id="travelMessageStatus" class="photoHint" aria-live="polite"></div></div>
+    <p class="photoHint">Front-end preview only. Real matching and anonymous chat will be connected later. Age-safety restrictions still apply privately.</p>
+  </div>
+</section>
+<section id="messagesPage" class="page"><div class="intro"><div class="eyebrow">COSMIC TRANSMISSIONS</div><h1>Messages</h1><div class="muted">Text, voice notes and photos with your Companions.</div></div>
+  <div class="card"><div class="eyebrow">MESSAGING PREVIEW</div><h2 style="font:700 21px 'Space Grotesk';margin:7px 0">Your transmission console</h2><p class="muted">This is a local interface preview. Messages are not delivered or saved to an account yet.</p>
+    <div class="chatPreview"><div class="chatTop"><div class="chatAvatar">O</div><div><strong>Conversation preview</strong><div class="muted" style="font-size:11px">Companion chat · demo interface</div></div></div>
+      <div class="chatMessages" id="chatMessages"><div class="chatHint" id="chatHint">Your conversations will appear here once messaging is connected.<br>Try the composer below to preview the interface.</div></div>
+      <div class="recordingState" id="recordingState"><span class="recordDot"></span><span id="recordingLabel">Recording voice note…</span></div>
+      <div class="chatComposer"><button class="iconAction" id="photoAttach" type="button" aria-label="Attach photo" title="Attach photo"><svg class="uiIcon"><use href="#oi-image"/></svg></button>
+        <button class="iconAction" id="voiceRecord" type="button" aria-label="Record voice message" title="Record voice message"><svg class="uiIcon"><use href="#oi-mic"/></svg></button><input id="chatText" type="text" maxlength="500" placeholder="Write a transmission…" aria-label="Message text"><button class="chatSend" id="sendChat" type="button" aria-label="Send message"><svg class="uiIcon"><use href="#oi-send"/></svg></button>
+        <input id="chatPhotoInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+      </div><div class="chatNotice">Voice notes and photo attachments can be previewed here. Real sending, storage and delivery receipts come later.</div>
+    </div>
+    <div class="previewTools"><button id="stopRecording" class="secondary hidden" type="button">Stop recording</button><button id="cancelRecording" class="textButton hidden" type="button">Cancel</button></div>
+  </div>
+</section>
+<section id="companionsPage" class="page"><div class="intro"><div class="eyebrow">YOUR COSMIC CIRCLE</div><h1>Companions</h1></div><div class="card empty"><div class="emptyOrb"><svg class="uiIcon"><use href="#oi-companions"/></svg></div><h2>Your crew starts here</h2><p>Accepted connections will appear here when Signals are ready.</p></div></section>
+<section id="galaxiesPage" class="page"><div class="intro"><div class="eyebrow">FIND YOUR COMMUNITY</div><h1>Galaxies</h1></div><div class="card empty"><div class="emptyOrb"><svg class="uiIcon"><use href="#oi-galaxies"/></svg></div><h2>Galaxies are forming</h2><p>Interest communities will be added in a later stage.</p></div></section>
+<section id="profilePage" class="page"><div class="intro"><div class="eyebrow">YOUR CORNER OF THE UNIVERSE</div><h1>Profile</h1><div class="muted">Your identity, your homeworld.</div></div>
+  <div class="profileLayout">
+    <div class="card identity"><div class="photoFrame"><img id="profilePhoto" class="hidden" alt="Your profile photo"><span id="photoFallback" class="photoFallback"><svg class="uiIcon"><use href="#oi-profile"/></svg></span></div><h2 id="profileCallsign">Unknown Voyager</h2><p id="profileEmail" class="muted"></p><div class="infoRow"><span>Age</span><strong id="profileAge">—</strong></div><div class="infoRow"><span>Preferred range</span><strong id="profilePreference">Not set</strong></div><div class="infoRow"><span>Email</span><strong id="profileStatus">—</strong></div></div>
+    <div class="card"><div class="eyebrow">MANAGE YOUR HOMEWORLD</div><h2 style="font:700 21px 'Space Grotesk'">Profile settings</h2>
+      <div class="field"><label for="editCallsign">CALLSIGN</label><input id="editCallsign" maxlength="20"></div>
+      <div class="field"><label for="photoInput">PROFILE PHOTO (OPTIONAL)</label><input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp"><div class="photoHint">You can leave this empty. JPG, PNG or WebP, maximum 5 MB.</div><div id="photoStatus" class="uploadStatus" role="status" aria-live="polite"></div></div>
+      <button id="savePhoto" class="secondary" type="button" style="margin-bottom:12px">Upload profile photo</button>
+      <div class="field"><label>PREFERRED AGE RANGE</label><div class="rangeWrap"><div class="rangeValues"><span>Your selection</span><strong id="profileRangeLabel">15 – 17</strong></div><div class="rangeControls"><div class="rangeTrack"></div><input id="profileAgeMin" type="range" min="15" max="17" value="15" aria-label="Minimum preferred age"><input id="profileAgeMax" type="range" min="15" max="17" value="17" aria-label="Maximum preferred age"></div></div></div>
+      <div class="profileActions"><button id="saveProfile" class="primary" type="button">Save profile settings</button><button id="refreshVerification" class="secondary" type="button">I've verified my email</button><button id="resendVerification" class="secondary" type="button">Resend verification email</button><button id="profileThemes" class="secondary" type="button">Appearance & themes</button><button id="logoutBtn" class="danger" type="button">Log out</button></div>
+    </div>
+  </div>
+</section>
+</main>
 
-<nav id="bottomNav" class="bottomNav hidden">
-  <button class="navBtn active" data-page="home">
-    <span class="navIcon">🏠</span><span>Home</span>
-  </button>
-  <button class="navBtn" data-page="explore">
-    <span class="navIcon">🌌</span><span>Explore</span>
-  </button>
-  <button class="navBtn" data-page="signals">
-    <span class="navIcon">📡</span><span>Signals</span>
-  </button>
-  <button class="navBtn" data-page="companions">
-    <span class="navIcon">🪐</span><span>Crew</span>
-  </button>
-  <button class="navBtn" data-page="profile">
-    <span class="navIcon">👽</span><span>Profile</span>
-  </button>
+<section id="setupView" class="authMain">
+<div class="intro"><div class="eyebrow">ONE LAST STEP</div><h1>Finish your Homeworld</h1><div class="muted">Add your Callsign and date of birth. A profile photo is optional.</div></div>
+<div class="card"><div id="setupMessage" class="message"></div><form id="setupForm"><div class="field"><label for="setupCallsign">CALLSIGN</label><input id="setupCallsign" minlength="3" maxlength="20" required></div><div class="field"><label for="setupDob">DATE OF BIRTH</label><input id="setupDob" type="date" required><div class="photoHint">You must be at least 15 to join. Your date of birth stays private.</div></div><button class="primary">Complete my account</button></form><button id="setupLogout" class="danger" style="margin-top:12px">Log out</button></div>
+</section>
+
+<nav id="bottomNav" class="bottomNav hidden" aria-label="Main navigation">
+<button class="navBtn active" data-page="home"><span class="navIcon"><svg class="uiIcon"><use href="#oi-home"/></svg></span>Home</button>
+<button class="navBtn" data-page="explore"><span class="navIcon"><svg class="uiIcon"><use href="#oi-explore"/></svg></span>Explore</button>
+<button class="navBtn" data-page="travel"><span class="navIcon"><svg class="uiIcon"><use href="#oi-orbit"/></svg></span>Travel</button>
+<button class="navBtn" data-page="drift"><span class="navIcon" aria-hidden="true">🚀</span>Drift</button>
+<button class="navBtn" data-page="messages"><span class="navIcon"><svg class="uiIcon"><use href="#oi-messages"/></svg></span>Messages</button>
+<button class="navBtn" data-page="profile"><span class="navIcon"><svg class="uiIcon"><use href="#oi-profile"/></svg></span>Profile</button>
 </nav>
 
-<footer>ORBIT © 2026 · A universe full of strangers.</footer>
+<div id="themeModal" class="modalBackdrop"><div class="modal"><div class="modalHead"><h2>Choose your atmosphere</h2><button class="close" data-close="themeModal">×</button></div><div class="themeGrid"><button class="themeChoice" data-theme-choice="dark">Dark<br><small>Quiet midnight</small></button><button class="themeChoice" data-theme-choice="light">Light<br><small>Clear daylight</small></button><button class="themeChoice" data-theme-choice="system">System default</button><button class="themeChoice" data-theme-choice="cosmic">Cosmic gradient</button></div></div></div>
+<div id="createModal" class="modalBackdrop"><div class="modal"><div class="modalHead"><h2>Create a Beacon</h2><button class="close" data-close="createModal" aria-label="Close">×</button></div><p class="muted">Share a thought, question or moment with your chosen audience.</p><div class="postComposer"><div class="field"><label for="postText">YOUR BEACON</label><textarea id="postText" maxlength="1000" placeholder="What's happening in your universe?"></textarea></div><div class="field"><label for="postAudience">WHO CAN SEE THIS?</label><select id="postAudience"><option value="public">Everyone (public)</option><option value="companions">My Companions</option><option value="private">Only me (private)</option></select></div><div class="photoHint">Publishing and photo posts will be activated when the post feed and privacy rules are connected.</div><button id="previewPost" class="primary" type="button">Preview Beacon</button><div id="postPreviewStatus" class="message" aria-live="polite"></div></div></div></div>
+<div id="filterModal" class="modalBackdrop"><div class="modal"><div class="modalHead"><h2>Explore preferences</h2><button class="close" data-close="filterModal">×</button></div><div class="rangeWrap"><div class="rangeValues"><span>Preferred age range</span><strong id="modalRangeLabel">15 – 17</strong></div><div class="rangeControls"><div class="rangeTrack"></div><input id="modalAgeMin" type="range" min="15" max="17" value="15" aria-label="Minimum preferred age"><input id="modalAgeMax" type="range" min="15" max="17" value="17" aria-label="Maximum preferred age"></div><div class="rangeHelp">Choose the ages you would like to discover, within your own age group.</div></div>
+<div class="field"><label for="audienceGender">GENDER</label><select id="audienceGender"><option value="all">All</option><option value="women">Women</option><option value="men">Men</option><option value="nonbinary">Non-binary</option></select></div>
+<div class="field"><label for="targetCountry">TARGET COUNTRY</label><select id="targetCountry"><option value="random">Random</option><option>Nigeria</option><option>Ghana</option><option>South Africa</option><option>Kenya</option><option>United Kingdom</option><option>United States</option><option>Canada</option><option>Australia</option><option>India</option><option>Other</option></select></div>
+<div class="field"><label for="avoidedCountries">AVOIDED COUNTRIES</label><input id="avoidedCountries" maxlength="250" placeholder="e.g. Ghana, Canada"><div class="photoHint">Separate countries with commas. These are saved preferences, not active filters until discovery is connected.</div></div>
+<button id="saveFilter" class="primary">Save preferences</button></div></div>
+<div id="imageViewer" class="imageViewer" role="dialog" aria-modal="true" aria-label="Photo preview"><button id="closeImageViewer" type="button" aria-label="Close photo">×</button><img id="imageViewerPhoto" alt="Expanded conversation photo"></div>
+<div id="orbitToast" class="orbitToast" role="status" aria-live="polite"></div>
+<footer>ORBIT © 2026 · Connect Beyond Worlds.</footer>
 
 <script type="module">
-import { initializeApp } from
-  "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
-
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-  signOut,
-  sendEmailVerification,
-  sendPasswordResetEmail,
-  reload
-} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
-
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  setDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAQVfPNnssa2wg8vdUUY3dNXrItSsQJ8SA",
-  authDomain: "orbit-95977.firebaseapp.com",
-  projectId: "orbit-95977",
-  storageBucket: "orbit-95977.firebasestorage.app",
-  messagingSenderId: "411222476333",
-  appId: "1:411222476333:web:1ff6e0151b0329a01e5aa4"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const googleProvider = new GoogleAuthProvider();
-
-const $ = id => document.getElementById(id);
-
-let mode = "login";
-let currentUser = null;
-let currentProfile = null;
-let authOperation = false;
-
-const cometQuestions = [
-  "If you could visit any planet in the universe, where would you go?",
-  "What's a small thing that can instantly make your day better?",
-  "If your life had a theme song, what kind of song would it be?",
-  "What's something you've always wanted to learn?",
-  "Would you rather explore the deepest ocean or outer space?",
-  "What's a fictional world you'd love to visit?",
-  "What's one thing you wish more people understood about you?"
-];
-
-function getDateKey() {
-  const d = new Date();
-  return [
-    d.getFullYear(),
-    String(d.getMonth() + 1).padStart(2, "0"),
-    String(d.getDate()).padStart(2, "0")
-  ].join("-");
-}
-
-function getTodayQuestion() {
-  const start = new Date(2026, 0, 1);
-  const today = new Date();
-  const day = Math.floor(
-    (new Date(today.getFullYear(), today.getMonth(), today.getDate()) - start)
-    / 86400000
-  );
-  const index = ((day % cometQuestions.length) + cometQuestions.length)
-    % cometQuestions.length;
-  return cometQuestions[index];
-}
-
-function showMessage(id, message) {
-  const box = $(id);
-  box.textContent = message;
-  box.classList.add("show");
-}
-
-function clearMessage(id) {
-  const box = $(id);
-  box.textContent = "";
-  box.classList.remove("show");
-}
-
-function friendlyError(error) {
-  const messages = {
-    "auth/email-already-in-use": "This email already has an account. Try logging in.",
-    "auth/invalid-email": "Please enter a valid email address.",
-    "auth/weak-password": "Your password must have at least 6 characters.",
-    "auth/invalid-credential": "Email or password is incorrect.",
-    "auth/user-not-found": "No account was found. Create one first.",
-    "auth/wrong-password": "Email or password is incorrect.",
-    "auth/network-request-failed": "Connection problem. Check your internet.",
-    "auth/unauthorized-domain": "This website domain is not authorised in Firebase.",
-    "auth/popup-blocked": "The sign-in window was blocked. Try again.",
-    "permission-denied": "Firestore rules blocked this action.",
-    "unavailable": "The service is temporarily unavailable. Try again."
-  };
-
-  return messages[error.code] ||
-    error.message ||
-    "Something went wrong. Please try again.";
-}
-
-function setMode(newMode) {
-  mode = newMode;
-  clearMessage("authMessage");
-
-  $("loginTab").classList.toggle("active", mode === "login");
-  $("signupTab").classList.toggle("active", mode === "signup");
-
-  $("callsignField").classList.toggle("hidden", mode !== "signup");
-  $("ageField").classList.toggle("hidden", mode !== "signup");
-
-  $("callsign").required = mode === "signup";
-  $("ageGroup").required = mode === "signup";
-
-  $("submitBtn").textContent =
-    mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
-
-  $("forgotBtn").style.display = mode === "login" ? "block" : "none";
-}
-
-$("loginTab").addEventListener("click", () => setMode("login"));
-$("signupTab").addEventListener("click", () => setMode("signup"));
-
-function showAuth() {
-  $("authMain").style.display = "block";
-  $("authView").style.display = "block";
-  $("appView").style.display = "none";
-  $("setupView").style.display = "none";
-  $("bottomNav").classList.add("hidden");
-  $("headerStatus").textContent = "✦ YOUR UNIVERSE AWAITS";
-}
-
-function showSetup(user, suggestedAge = "") {
-  $("authMain").style.display = "none";
-  $("appView").style.display = "none";
-  $("setupView").style.display = "block";
-  $("bottomNav").classList.add("hidden");
-
-  $("setupCallsign").value = user.displayName || "";
-  $("setupAge").value = suggestedAge;
-}
-
-function showApp() {
-  $("authMain").style.display = "none";
-  $("setupView").style.display = "none";
-  $("appView").style.display = "block";
-  $("bottomNav").classList.remove("hidden");
-  $("headerStatus").textContent = "✦ ONLINE";
-}
-
-async function savePrivateProfile(user, callsign, ageGroup) {
-  const userRef = doc(db, "users", user.uid);
-  const existing = await getDoc(userRef);
-
-  if (existing.exists()) return existing.data();
-
-  const profile = {
-    uid: user.uid,
-    email: user.email || "",
-    callsign: callsign,
-    ageGroup: ageGroup,
-    createdAt: serverTimestamp()
-  };
-
-  await setDoc(userRef, profile);
-  return profile;
-}
-
-async function loadUser(user) {
-  if (!user) {
-    currentUser = null;
-    currentProfile = null;
-    showAuth();
-    return;
-  }
-
-  currentUser = user;
-  $("headerStatus").textContent = "✦ CONNECTING";
-
-  try {
-    const userRef = doc(db, "users", user.uid);
-    const snapshot = await getDoc(userRef);
-
-    if (!snapshot.exists()) {
-      const suggestedAge = sessionStorage.getItem("orbit_age_group") || "";
-      showSetup(user, suggestedAge);
-      return;
-    }
-
-    currentProfile = snapshot.data();
-    sessionStorage.removeItem("orbit_age_group");
-    renderProfile();
-    renderComet();
-    showApp();
-    switchPage("home");
-
-  } catch (error) {
-    showAuth();
-    showMessage("authMessage", friendlyError(error));
-  }
-}
-
-function renderProfile() {
-  if (!currentUser || !currentProfile) return;
-
-  const callsign = currentProfile.callsign || "Unknown Voyager";
-
-  $("homeGreeting").textContent = "Hello, " + callsign + ".";
-  $("profileCallsign").textContent = callsign;
-  $("profileCallsignInfo").textContent = callsign;
-  $("profileEmail").textContent = currentUser.email || "";
-  $("profileAge").textContent = currentProfile.ageGroup || "Not set";
-  $("profileStatus").textContent =
-    currentUser.emailVerified ? "Verified" : "Not verified";
-  $("profileAccount").textContent = "Active";
-  $("editCallsign").value = callsign;
-
-  if (!currentUser.emailVerified) {
-    $("verificationBanner").classList.remove("hidden");
-    $("verificationBanner").textContent =
-      "Your email is not verified yet. Verify it before social features become available.";
-    $("refreshVerification").style.display = "block";
-    $("resendVerification").style.display = "block";
-  } else {
-    $("verificationBanner").classList.add("hidden");
-    $("refreshVerification").style.display = "none";
-    $("resendVerification").style.display = "none";
-  }
-}
-
-function renderComet() {
-  $("cometQuestion").textContent = getTodayQuestion();
-
-  const savedDate = currentProfile?.cometDate || "";
-  const today = getDateKey();
-
-  if (savedDate === today && currentProfile?.cometAnswer) {
-    $("cometAnswer").value = currentProfile.cometAnswer;
-    $("savedAnswer").textContent =
-      "Your answer is saved privately: " + currentProfile.cometAnswer;
-    $("savedAnswer").style.display = "block";
-    $("cometSubmit").textContent = "Update my answer";
-  } else {
-    $("cometAnswer").value = "";
-    $("savedAnswer").style.display = "none";
-    $("cometSubmit").textContent = "Save my answer";
-  }
-}
-
-function switchPage(pageName) {
-  const allowed = ["home", "explore", "signals", "companions", "profile"];
-  if (!allowed.includes(pageName)) return;
-
-  document.querySelectorAll(".page").forEach(page => {
-    page.classList.remove("active");
-  });
-
-  const target = $(pageName + "Page");
-  if (target) target.classList.add("active");
-
-  document.querySelectorAll(".navBtn").forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.dataset.page === pageName
-    );
-  });
-
-  window.scrollTo({ top:0, behavior:"smooth" });
-}
-
-document.querySelectorAll("[data-page]").forEach(button => {
-  button.addEventListener("click", () => {
-    switchPage(button.dataset.page);
-  });
-});
-
-$("authForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  clearMessage("authMessage");
-
-  const email = $("email").value.trim();
-  const password = $("password").value;
-  const callsign = $("callsign").value.trim();
-  const ageGroup = $("ageGroup").value;
-
-  if (mode === "signup") {
-    if (callsign.length < 3) {
-      showMessage("authMessage", "Your callsign must be at least 3 characters.");
-      return;
-    }
-    if (!ageGroup) {
-      showMessage("authMessage", "Choose your age group.");
-      return;
-    }
-  }
-
-  $("submitBtn").disabled = true;
-  $("submitBtn").textContent = "Connecting...";
-  authOperation = true;
-
-  try {
-    let user;
-
-    if (mode === "signup") {
-      const result = await createUserWithEmailAndPassword(
-        auth, email, password
-      );
-      user = result.user;
-
-      await savePrivateProfile(user, callsign, ageGroup);
-      await sendEmailVerification(user);
-    } else {
-      const result = await signInWithEmailAndPassword(
-        auth, email, password
-      );
-      user = result.user;
-    }
-
-    await loadUser(user);
-
-    if (mode === "signup") {
-      $("verificationBanner").classList.remove("hidden");
-      $("verificationBanner").textContent =
-        "Account created! Check your email for a verification link.";
-    }
-
-  } catch (error) {
-    showAuth();
-    showMessage("authMessage", friendlyError(error));
-  } finally {
-    authOperation = false;
-    $("submitBtn").disabled = false;
-    $("submitBtn").textContent =
-      mode === "signup" ? "Create my ORBIT account" : "Login to ORBIT";
-  }
-});
-
-$("forgotBtn").addEventListener("click", async () => {
-  const email = $("email").value.trim();
-
-  if (!email) {
-    showMessage("authMessage", "Enter your email address first.");
-    return;
-  }
-
-  try {
-    await sendPasswordResetEmail(auth, email);
-    showMessage("authMessage", "Password reset email sent. Check your inbox.");
-  } catch (error) {
-    showMessage("authMessage", friendlyError(error));
-  }
-});
-
-$("googleBtn").addEventListener("click", async () => {
-  clearMessage("authMessage");
-
-  if (mode === "signup") {
-    const ageGroup = $("ageGroup").value;
-    if (!ageGroup) {
-      showMessage("authMessage", "Choose your age group first.");
-      return;
-    }
-    sessionStorage.setItem("orbit_age_group", ageGroup);
-  }
-
-  try {
-    await signInWithRedirect(auth, googleProvider);
-  } catch (error) {
-    showMessage("authMessage", friendlyError(error));
-  }
-});
-
-$("setupForm").addEventListener("submit", async event => {
-  event.preventDefault();
-  clearMessage("setupMessage");
-
-  const callsign = $("setupCallsign").value.trim();
-  const ageGroup = $("setupAge").value;
-
-  if (callsign.length < 3) {
-    showMessage("setupMessage", "Your callsign must be at least 3 characters.");
-    return;
-  }
-
-  if (!ageGroup || !currentUser) {
-    showMessage("setupMessage", "Choose your age group.");
-    return;
-  }
-
-  const button = $("setupForm").querySelector("button");
-  button.disabled = true;
-  button.textContent = "Saving...";
-
-  try {
-    await savePrivateProfile(currentUser, callsign, ageGroup);
-    await loadUser(currentUser);
-    sessionStorage.removeItem("orbit_age_group");
-  } catch (error) {
-    showMessage("setupMessage", friendlyError(error));
-  } finally {
-    button.disabled = false;
-    button.textContent = "Complete my account";
-  }
-});
-
-$("setupLogout").addEventListener("click", async () => {
-  await signOut(auth);
-});
-
-$("cometForm").addEventListener("submit", async event => {
-  event.preventDefault();
-
-  if (!currentUser || !currentProfile) return;
-
-  const answer = $("cometAnswer").value.trim();
-  if (!answer) return;
-
-  const button = $("cometSubmit");
-  button.disabled = true;
-  button.textContent = "Saving...";
-
-  try {
-    await setDoc(
-      doc(db, "users", currentUser.uid),
-      {
-        cometDate: getDateKey(),
-        cometAnswer: answer
-      },
-      { merge:true }
-    );
-
-    currentProfile.cometDate = getDateKey();
-    currentProfile.cometAnswer = answer;
-
-    $("savedAnswer").textContent =
-      "Your answer is saved privately: " + answer;
-    $("savedAnswer").style.display = "block";
-    button.textContent = "Update my answer";
-
-  } catch (error) {
-    alert(friendlyError(error));
-    button.textContent = "Try again";
-  } finally {
-    button.disabled = false;
-  }
-});
-
-$("saveProfile").addEventListener("click", async () => {
-  if (!currentUser || !currentProfile) return;
-
-  const callsign = $("editCallsign").value.trim();
-
-  if (callsign.length < 3) {
-    alert("Your callsign must be at least 3 characters.");
-    return;
-  }
-
-  const button = $("saveProfile");
-  button.disabled = true;
-  button.textContent = "Saving...";
-
-  try {
-    await setDoc(
-      doc(db, "users", currentUser.uid),
-      { callsign:callsign },
-      { merge:true }
-    );
-
-    currentProfile.callsign = callsign;
-    renderProfile();
-    alert("Callsign updated.");
-
-  } catch (error) {
-    alert(friendlyError(error));
-  } finally {
-    button.disabled = false;
-    button.textContent = "Save callsign";
-  }
-});
-
-$("refreshVerification").addEventListener("click", async () => {
-  if (!currentUser) return;
-
-  try {
-    await reload(currentUser);
-    currentUser = auth.currentUser;
-    renderProfile();
-
-    alert(
-      currentUser.emailVerified
-        ? "Your email is verified."
-        : "We haven't detected verification yet. Open the email link, then try again."
-    );
-  } catch (error) {
-    alert(friendlyError(error));
-  }
-});
-
-$("resendVerification").addEventListener("click", async () => {
-  if (!currentUser) return;
-
-  try {
-    await sendEmailVerification(currentUser);
-    alert("Verification email sent. Check your inbox.");
-  } catch (error) {
-    alert(friendlyError(error));
-  }
-});
-
-async function logout() {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    alert(friendlyError(error));
-  }
-}
-
-$("logoutBtn").addEventListener("click", logout);
-
-try {
-  await getRedirectResult(auth);
-} catch (error) {
-  showMessage("authMessage", friendlyError(error));
-}
-
-onAuthStateChanged(auth, async user => {
-  if (authOperation) return;
-  await loadUser(user);
-});
-
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithRedirect,onAuthStateChanged,signOut,sendEmailVerification,sendPasswordResetEmail,reload,getRedirectResult} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-auth.js";
+import {getFirestore,doc,getDoc,setDoc,serverTimestamp} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
+import {getStorage,ref,uploadBytesResumable,getDownloadURL} from "https://www.gstatic.com/firebasejs/13.4.0/firebase-storage.js";
+const firebaseConfig={apiKey:"AIzaSyAQVfPNnssa2wg8vdUUY3dNXrItSsQJ8SA",authDomain:"orbit-95977.firebaseapp.com",projectId:"orbit-95977",storageBucket:"orbit-95977.firebasestorage.app",messagingSenderId:"411222476333",appId:"1:411222476333:web:1ff6e0151b0329a01e5aa4"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),storage=getStorage(app),googleProvider=new GoogleAuthProvider();
+const $=id=>document.getElementById(id);let mode="login",currentUser=null,currentProfile=null,authOperation=false;
+const cometQuestions=["If you could visit any planet in the universe, where would you go?","What's a small thing that can instantly make your day better?","If your life had a theme song, what kind of song would it be?","What's something you've always wanted to learn?","Would you rather explore the deepest ocean or outer space?","What's a fictional world you'd love to visit?","What's one thing you wish more people understood about you?"];
+function dateKey(){const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-")}
+$("dateOfBirth").max=dateKey();$("setupDob").max=dateKey();
+function todayQuestion(){const start=new Date(2026,0,1),d=new Date(),day=Math.floor((new Date(d.getFullYear(),d.getMonth(),d.getDate())-start)/86400000);return cometQuestions[((day%cometQuestions.length)+cometQuestions.length)%cometQuestions.length]}
+function message(id,msg){$(id).textContent=msg;$(id).classList.add("show")}function clear(id){$(id).textContent="";$(id).classList.remove("show")}
+function toast(msg){const t=$("orbitToast");if(!t)return;t.textContent=String(msg);t.classList.add("show");clearTimeout(window.__orbitToastTimer);window.__orbitToastTimer=setTimeout(()=>t.classList.remove("show"),3200)}
+window.alert=(msg)=>toast(msg);
+function friendly(e){const m={"auth/email-already-in-use":"This email already has an account. Try logging in.","auth/invalid-email":"Enter a valid email address.","auth/weak-password":"Password must have at least 6 characters.","auth/invalid-credential":"Email or password is incorrect.","auth/network-request-failed":"Connection problem. Check your internet.","auth/invalid-api-key":"Firebase rejected the configured API key. Check the Firebase Web App key and its Firebase Authentication API access.","auth/api-key-not-valid.-please-pass-a-valid-api-key.":"Firebase rejected the API key during sign-in. The login code is unchanged; check that the Firebase Web App key is active and allows Firebase Authentication.","auth/unauthorized-domain":"This website domain is not authorised in Firebase.","permission-denied":"Firebase rules blocked this action.","storage/unauthorized":"Photo upload is not permitted by the current Firebase Storage rules.","storage/unknown":"Photo upload failed. Check Storage setup and try again."};return m[e.code]||e.message||"Something went wrong."}
+function showAuth(){$("authMain").style.display="block";$("authView").style.display="block";$("appView").style.display="none";$("setupView").style.display="none";$("bottomNav").classList.add("hidden");$("headerStatus")?.remove()}
+function showSetup(user,dob=""){$("authMain").style.display="none";$("appView").style.display="none";$("setupView").style.display="block";$("bottomNav").classList.add("hidden");$("setupCallsign").value=user.displayName||"";$("setupDob").value=dob;$("setupDob").max=dateKey()}
+function showApp(){$("authMain").style.display="none";$("setupView").style.display="none";$("appView").style.display="block";$("bottomNav").classList.remove("hidden")}
+function calculateAge(dob){if(!dob)return null;const birth=new Date(dob+"T00:00:00"),today=new Date();let age=today.getFullYear()-birth.getFullYear();if(today.getMonth()<birth.getMonth()||(today.getMonth()===birth.getMonth()&&today.getDate()<birth.getDate()))age--;return age}
+function validateDob(dob){if(!dob)return {ok:false,message:"Enter your date of birth."};const birth=new Date(dob+"T00:00:00"),age=calculateAge(dob);if(Number.isNaN(birth.getTime())||birth>new Date())return {ok:false,message:"Enter a valid date of birth."};if(age<15)return {ok:false,message:"You must be at least 15 to create an ORBIT account."};if(age>110)return {ok:false,message:"Check the date of birth you entered."};return {ok:true,age,ageGroup:age<18?"13-17":"18+"}}
+function boundsForProfile(profile){return profile?.ageGroup==="18+"?{min:18,max:90}:{min:15,max:17}}
+async function savePrivateProfile(user,callsign,dob){const r=doc(db,"users",user.uid),s=await getDoc(r);if(s.exists())return s.data();const check=validateDob(dob);if(!check.ok)throw new Error(check.message);const limits=check.ageGroup==="18+"?{min:18,max:90}:{min:15,max:17};const p={uid:user.uid,email:user.email||"",callsign,dateOfBirth:dob,ageYears:check.age,ageGroup:check.ageGroup,createdAt:serverTimestamp(),preferredAgeMin:limits.min,preferredAgeMax:limits.max};await setDoc(r,p);return p}
+function rangePair(prefix){return {min:$(prefix+"AgeMin"),max:$(prefix+"AgeMax"),label:$(prefix+"RangeLabel")}}
+function setRange(prefix,min,max,limits){const r=rangePair(prefix);if(!r.min)return;min=Math.max(limits.min,Math.min(limits.max,Number(min)));max=Math.max(limits.min,Math.min(limits.max,Number(max)));if(min>max){if(document.activeElement===r.min)min=max;else max=min}r.min.min=r.max.min=limits.min;r.min.max=r.max.max=limits.max;r.min.value=min;r.max.value=max;r.label.textContent=min+" – "+max}
+function fillAgeRanges(){const limits=boundsForProfile(currentProfile),savedMin=Number(currentProfile?.preferredAgeMin),savedMax=Number(currentProfile?.preferredAgeMax);const min=Number.isFinite(savedMin)&&savedMin>=limits.min&&savedMin<=limits.max?savedMin:limits.min;const max=Number.isFinite(savedMax)&&savedMax>=min&&savedMax<=limits.max?savedMax:limits.max;["home","profile","modal"].forEach(prefix=>setRange(prefix,min,max,limits))}
+function syncRanges(source){const limits=boundsForProfile(currentProfile),r=rangePair(source);setRange(source,Number(r.min.value),Number(r.max.value),limits);const current=rangePair(source);["home","profile","modal"].filter(x=>x!==source).forEach(prefix=>setRange(prefix,Number(current.min.value),Number(current.max.value),limits))}
+function agePreferenceLabel(profile){const limits=boundsForProfile(profile);return (profile?.preferredAgeMin??limits.min)+" – "+(profile?.preferredAgeMax??limits.max)}
+function renderProfile(){if(!currentUser||!currentProfile)return;const c=currentProfile.callsign||"Unknown Voyager";$("homeGreeting").textContent=c;$("profileCallsign").textContent=c;$("profileEmail").textContent=currentUser.email||"";$("profileAge").textContent=currentProfile.ageYears??(currentProfile.dateOfBirth?calculateAge(currentProfile.dateOfBirth):(currentProfile.ageGroup||"Not provided"));$("profileStatus").textContent=currentUser.emailVerified?"Verified":"Not verified";$("editCallsign").value=c;$("profilePreference").textContent=agePreferenceLabel(currentProfile);const photo=currentProfile.photoURL||"";if(photo){$("profilePhoto").src=photo;$("profilePhoto").classList.remove("hidden");$("photoFallback").classList.add("hidden")}else{$("profilePhoto").classList.add("hidden");$("photoFallback").classList.remove("hidden")}fillAgeRanges();if(!currentUser.emailVerified){$("verificationBanner").classList.remove("hidden");$("verificationBanner").textContent="Your email is not verified yet. Verify it before social features become available."}else $("verificationBanner").classList.add("hidden")}
+function renderComet(){$("cometQuestion").textContent=todayQuestion();const saved=currentProfile?.cometDate===dateKey()&&currentProfile?.cometAnswer;if(saved){$("cometAnswer").value=currentProfile.cometAnswer;message("savedAnswer","Your answer is saved privately: "+currentProfile.cometAnswer);$("cometSubmit").textContent="Update my answer"}else{$("cometAnswer").value="";clear("savedAnswer");$("cometSubmit").textContent="Save my answer"}}
+async function loadUser(user){if(!user){currentUser=null;currentProfile=null;showAuth();return}currentUser=user;try{const s=await getDoc(doc(db,"users",user.uid));if(!s.exists()){showSetup(user,sessionStorage.getItem("orbit_dob")||"");return}currentProfile=s.data();sessionStorage.removeItem("orbit_dob");renderProfile();renderComet();showApp();switchPage("home")}catch(e){showAuth();message("authMessage",friendly(e))}}
+function switchPage(name){const allowed=["home","explore","travel","drift","messages","companions","galaxies","profile"];if(!allowed.includes(name))return;document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));$(name+"Page").classList.add("active");document.querySelectorAll(".navBtn").forEach(b=>b.classList.toggle("active",b.dataset.page===name));window.scrollTo({top:0,behavior:"smooth"})}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>switchPage(b.dataset.page)));
+function setMode(m){mode=m;clear("authMessage");$("loginTab").classList.toggle("active",m==="login");$("signupTab").classList.toggle("active",m==="signup");$("callsignField").classList.toggle("hidden",m!=="signup");$("dobField").classList.toggle("hidden",m!=="signup");$("callsign").required=m==="signup";$("dateOfBirth").required=m==="signup";$("dateOfBirth").max=dateKey();$("submitBtn").textContent=m==="signup"?"Create my ORBIT account":"Login to ORBIT";$("forgotBtn").style.display=m==="login"?"block":"none"}
+$("loginTab").onclick=()=>setMode("login");$("signupTab").onclick=()=>setMode("signup");
+$("authForm").addEventListener("submit",async e=>{e.preventDefault();clear("authMessage");const email=$("email").value.trim(),password=$("password").value,callsign=$("callsign").value.trim(),dob=$("dateOfBirth").value;let check={ok:true};if(mode==="signup"){check=validateDob(dob);if(callsign.length<3||!check.ok){message("authMessage",callsign.length<3?"Enter a Callsign with at least 3 characters.":check.message);return}}$("submitBtn").disabled=true;authOperation=true;try{let user;if(mode==="signup"){user=(await createUserWithEmailAndPassword(auth,email,password)).user;await savePrivateProfile(user,callsign,dob);await sendEmailVerification(user)}else user=(await signInWithEmailAndPassword(auth,email,password)).user;await loadUser(user)}catch(err){showAuth();message("authMessage",friendly(err))}finally{authOperation=false;$("submitBtn").disabled=false;$("submitBtn").textContent=mode==="signup"?"Create my ORBIT account":"Login to ORBIT"}});
+$("forgotBtn").onclick=async()=>{const email=$("email").value.trim();if(!email){message("authMessage","Enter your email address first.");return}try{await sendPasswordResetEmail(auth,email);message("authMessage","Password reset email sent.")}catch(e){message("authMessage",friendly(e))}};
+$("googleBtn").onclick=async()=>{if(mode==="signup"){const dob=$("dateOfBirth").value,check=validateDob(dob);if(!check.ok){message("authMessage",check.message);return}sessionStorage.setItem("orbit_dob",dob)}try{await signInWithRedirect(auth,googleProvider)}catch(e){message("authMessage",friendly(e))}};
+$("setupForm").onsubmit=async e=>{e.preventDefault();const c=$("setupCallsign").value.trim(),dob=$("setupDob").value,check=validateDob(dob);if(c.length<3||!check.ok||!currentUser){message("setupMessage",c.length<3?"Enter a Callsign with at least 3 characters.":check.message);return}try{await savePrivateProfile(currentUser,c,dob);await loadUser(currentUser);sessionStorage.removeItem("orbit_dob")}catch(err){message("setupMessage",friendly(err))}};$("setupLogout").onclick=()=>signOut(auth);
+$("cometForm").onsubmit=async e=>{e.preventDefault();if(!currentUser||!currentProfile)return;const answer=$("cometAnswer").value.trim();if(!answer)return;const b=$("cometSubmit");b.disabled=true;try{await setDoc(doc(db,"users",currentUser.uid),{cometDate:dateKey(),cometAnswer:answer},{merge:true});currentProfile.cometDate=dateKey();currentProfile.cometAnswer=answer;message("savedAnswer","Your answer is saved privately: "+answer);b.textContent="Update my answer"}catch(err){alert(friendly(err))}finally{b.disabled=false}};
+async function savePreferences(){if(!currentUser||!currentProfile)return;const min=Number($("modalAgeMin").value),max=Number($("modalAgeMax").value),limits=boundsForProfile(currentProfile);if(min>max||min<limits.min||max>limits.max){alert("Choose a valid age range within your own age group.");return}const audienceGender=$("audienceGender").value,targetCountry=$("targetCountry").value,avoidedCountries=$("avoidedCountries").value.split(",").map(x=>x.trim()).filter(Boolean);try{await setDoc(doc(db,"users",currentUser.uid),{preferredAgeMin:min,preferredAgeMax:max,preferredAgeRange:"",audienceGender,targetCountry,avoidedCountries},{merge:true});Object.assign(currentProfile,{preferredAgeMin:min,preferredAgeMax:max,preferredAgeRange:"",audienceGender,targetCountry,avoidedCountries});renderProfile();alert("Audience preferences saved privately.")}catch(e){alert(friendly(e))}}
+$("saveFilter").onclick=async()=>{await savePreferences();$("filterModal").classList.remove("open")};$("openFilters").onclick=()=>{$("filterModal").classList.add("open");fillAgeRanges();$("audienceGender").value=currentProfile?.audienceGender||"all";$("targetCountry").value=currentProfile?.targetCountry||"random";$("avoidedCountries").value=(currentProfile?.avoidedCountries||[]).join(", ")};["home","profile","modal"].forEach(prefix=>{const pair=rangePair(prefix);pair.min.addEventListener("input",()=>syncRanges(prefix));pair.max.addEventListener("input",()=>syncRanges(prefix))});
+$("startExploring").onclick=()=>switchPage("explore");
+$("saveProfile").onclick=async()=>{if(!currentUser||!currentProfile)return;const c=$("editCallsign").value.trim(),min=Number($("profileAgeMin").value),max=Number($("profileAgeMax").value),limits=boundsForProfile(currentProfile);if(c.length<3){alert("Callsign must be at least 3 characters.");return}if(min>max||min<limits.min||max>limits.max){alert("Choose a valid age range within your own age group.");return}try{await setDoc(doc(db,"users",currentUser.uid),{callsign:c,preferredAgeMin:min,preferredAgeMax:max,preferredAgeRange:""},{merge:true});currentProfile.callsign=c;currentProfile.preferredAgeMin=min;currentProfile.preferredAgeMax=max;currentProfile.preferredAgeRange="";renderProfile();alert("Profile settings saved.")}catch(e){alert(friendly(e))}};
+$("savePhoto").onclick=async()=>{if(!currentUser)return;const file=$("photoInput").files[0];if(!file){$("photoStatus").textContent="Choose a photo first. Profile photos are optional.";return}if(!["image/jpeg","image/png","image/webp"].includes(file.type)){$("photoStatus").textContent="Choose a JPG, PNG or WebP image.";return}if(file.size>5*1024*1024){$("photoStatus").textContent="That image is over 5 MB. Choose a smaller one.";return}const b=$("savePhoto");b.disabled=true;b.textContent="Uploading…";$("photoStatus").textContent="Uploading your photo…";try{const path=ref(storage,`profilePhotos/${currentUser.uid}/avatar`);const task=uploadBytesResumable(path,file,{contentType:file.type});await new Promise((resolve,reject)=>{task.on("state_changed",snap=>{$("photoStatus").textContent=`Uploading… ${Math.round(snap.bytesTransferred/snap.totalBytes*100)}%`},reject,resolve)});const url=await getDownloadURL(path);await setDoc(doc(db,"users",currentUser.uid),{photoURL:url},{merge:true});currentProfile.photoURL=url;renderProfile();$("photoInput").value="";$("photoStatus").textContent="Profile photo updated."}catch(e){$("photoStatus").textContent=friendly(e)+" If Firebase Storage is not enabled or its rules are missing, uploads cannot complete yet."}finally{b.disabled=false;b.textContent="Upload profile photo"}};
+$("refreshVerification").onclick=async()=>{try{await reload(currentUser);currentUser=auth.currentUser;renderProfile();alert(currentUser.emailVerified?"Email verified.":"Verification not detected yet.")}catch(e){alert(friendly(e))}};$("resendVerification").onclick=async()=>{try{await sendEmailVerification(currentUser);alert("Verification email sent.")}catch(e){alert(friendly(e))}};$("logoutBtn").onclick=()=>signOut(auth);
+$("createHero").onclick=()=> $("createModal").classList.add("open");
+$("openDrift").onclick=()=>switchPage("drift");
+$("driftText").addEventListener("input",()=>$("driftCount").textContent=`${$("driftText").value.length} / 500`);
+$("launchDrift").onclick=()=>{const value=$("driftText").value.trim();if(!value){toast("Write a message before launching your Drift.");$("driftText").focus();return}const stage=$("driftLaunchStage"),btn=$("launchDrift");$("driftPayload").textContent=value.slice(0,24)+(value.length>24?"…":"");stage.classList.remove("fired");void stage.offsetWidth;stage.classList.add("fired");btn.disabled=true;$("driftLaunchStatus").textContent="Your rocket is carrying your message into the universe…";setTimeout(()=>{$("driftLaunchStatus").textContent="Your message is drifting. Someone may discover it.";$("driftText").value="";$("driftCount").textContent="0 / 500";btn.disabled=false;stage.classList.remove("fired");toast("Drift launched in this preview.")},1500)};
+$("replyDrift").onclick=()=>{$("driftReplyArea").classList.remove("hidden");$("driftReplyText").focus()};
+$("passDrift").onclick=()=>{$("driftReplyArea").classList.add("hidden");$("driftReplyStatus").textContent="You passed on this sample Drift."};
+$("sendDriftReply").onclick=()=>{const v=$("driftReplyText").value.trim();if(!v){toast("Write a reply first.");return}$("driftReplyStatus").textContent="Reply preview created. Real replies will be delivered when Drift is connected.";$("driftReplyText").value="";$("driftReplyArea").classList.add("hidden")};
+$("openTravel").onclick=()=>switchPage("travel");
+$("openThemes").onclick=$("profileThemes").onclick=()=> $("themeModal").classList.add("open");
+document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).classList.remove("open"));
+document.querySelectorAll(".modalBackdrop").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")document.querySelectorAll(".modalBackdrop.open").forEach(m=>m.classList.remove("open"))});
+function applyTheme(choice){document.documentElement.dataset.theme=choice==="system"?(matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"):choice;localStorage.setItem("orbit_theme",choice);document.querySelectorAll("[data-theme-choice]").forEach(b=>b.classList.toggle("selected",b.dataset.themeChoice===choice))}
+let theme=localStorage.getItem("orbit_theme")||"cosmic";applyTheme(theme);document.querySelectorAll("[data-theme-choice]").forEach(b=>b.onclick=()=>applyTheme(b.dataset.themeChoice));
+// Local-only messaging and Star Voyage interface previews.
+const chatMessages=$("chatMessages"),chatHint=$("chatHint");
+function addPreviewBubble(content,kind="text"){chatHint?.remove();const bubble=document.createElement("div");bubble.className="chatBubble";if(kind==="image"){const img=document.createElement("img");img.src=content;img.alt="Selected photo preview";img.addEventListener("click",()=>{ $("imageViewerPhoto").src=content;$("imageViewer").classList.add("open") });bubble.appendChild(img)}else if(kind==="audio"){const wrap=document.createElement("div");wrap.className="audioMessage";const play=document.createElement("button");play.type="button";play.className="audioPlay";play.setAttribute("aria-label","Play voice message");play.innerHTML='<svg class="uiIcon"><use href="#oi-play"></use></svg>';const audio=document.createElement("audio");audio.preload="metadata";audio.src=content;const details=document.createElement("div");details.className="audioDetails";const bars=document.createElement("div");bars.className="audioWave";for(let i=0;i<24;i++){const bar=document.createElement("i");bar.style.height=(7+(i*7%15))+"px";bars.appendChild(bar)}const time=document.createElement("span");time.className="audioTime";time.textContent="Voice message";details.append(bars,time);play.onclick=()=>{if(audio.paused){audio.play().catch(()=>{});play.innerHTML='<svg class="uiIcon"><use href="#oi-pause"></use></svg>'}else{audio.pause();play.innerHTML='<svg class="uiIcon"><use href="#oi-play"></use></svg>'}};audio.onended=()=>play.innerHTML='<svg class="uiIcon"><use href="#oi-play"></use></svg>';audio.onloadedmetadata=()=>{if(Number.isFinite(audio.duration))time.textContent="0:"+String(Math.round(audio.duration)).padStart(2,"0")};wrap.append(play,details,audio);bubble.appendChild(wrap)}else bubble.textContent=content;chatMessages.appendChild(bubble);chatMessages.scrollTop=chatMessages.scrollHeight}
+$("sendChat").onclick=()=>{const v=$("chatText").value.trim();if(!v)return;addPreviewBubble(v);$("chatText").value=""};
+$("chatText").addEventListener("keydown",e=>{if(e.key==="Enter")$("sendChat").click()});
+$("photoAttach").onclick=()=>$("chatPhotoInput").click();
+$("chatPhotoInput").onchange=()=>{const f=$("chatPhotoInput").files?.[0];if(!f)return;if(!["image/jpeg","image/png","image/webp"].includes(f.type)||f.size>5*1024*1024){alert("Choose a JPG, PNG or WebP image under 5 MB.");$("chatPhotoInput").value="";return}const url=URL.createObjectURL(f);addPreviewBubble(url,"image")};
+$("closeImageViewer").onclick=()=>{$("imageViewer").classList.remove("open");$("imageViewerPhoto").src=""};$("imageViewer").onclick=e=>{if(e.target===$("imageViewer"))$("closeImageViewer").click()};document.addEventListener("keydown",e=>{if(e.key==="Escape")$("closeImageViewer").click()});
+let recorder=null,recordedChunks=[],recordingStream=null;
+$("voiceRecord").onclick=async()=>{if(recorder?.state==="recording")return;try{if(!navigator.mediaDevices?.getUserMedia||!window.MediaRecorder){alert("Voice recording is not supported in this browser. Try the hosted HTTPS version in Chrome.");return}recordingStream=await navigator.mediaDevices.getUserMedia({audio:true});recordedChunks=[];recorder=new MediaRecorder(recordingStream);recorder.ondataavailable=e=>{if(e.data.size)recordedChunks.push(e.data)};recorder.onstop=()=>{recordingStream?.getTracks().forEach(t=>t.stop());recordingStream=null;$("recordingState").classList.remove("active");$("stopRecording").classList.add("hidden");$("cancelRecording").classList.add("hidden");$("voiceRecord").disabled=false;if(recordedChunks.length){const blob=new Blob(recordedChunks,{type:recorder.mimeType||"audio/webm"});if(!window.cancelVoicePreview){const url=URL.createObjectURL(blob);addPreviewBubble(url,"audio")}window.cancelVoicePreview=false}};recorder.start();$("recordingState").classList.add("active");$("stopRecording").classList.remove("hidden");$("cancelRecording").classList.remove("hidden");$("voiceRecord").disabled=true}catch(e){alert("Microphone access was not granted. Check your browser permission and try again.")}};
+$("stopRecording").onclick=()=>{if(recorder?.state==="recording")recorder.stop()};
+$("cancelRecording").onclick=()=>{window.cancelVoicePreview=true;if(recorder?.state==="recording")recorder.stop()};
+let selectedDestination="random";
+document.querySelectorAll("[data-destination]").forEach(b=>b.addEventListener("click",()=>{selectedDestination=b.dataset.destination;document.querySelectorAll("[data-destination]").forEach(x=>x.classList.toggle("selected",x===b));$("destinationExtra").classList.toggle("hidden",selectedDestination!=="interests")}));
+$("launchVoyage").onclick=()=>{const alias=$("voyageAlias").value.trim();if(alias.length<2){$("voyageStatus").textContent="Choose a temporary name (at least 2 characters) first.";$("voyageAlias").focus();return}if(selectedDestination==="interests"&&!$("destinationDetail").value){$("voyageStatus").textContent="Choose an interest first.";$("destinationDetail").focus();return}const visual=$("voyageVisual"),btn=$("launchVoyage"),status=$("voyageStatus");$("travelArrival").classList.remove("show");$("travelMessageStatus").textContent="";visual.classList.remove("launched");void visual.offsetWidth;btn.disabled=true;btn.textContent="Finding a meet…";status.textContent=`${alias}'s spaceship is setting off…`;setTimeout(()=>{visual.classList.add("launched");const labels={random:"a random one-on-one meet",interests:`a shared-interest meet about ${$("destinationDetail").value}`,group:"an anonymous group meet"};status.textContent=`Your preview has reached ${labels[selectedDestination]}.`;$("arrivalDescription").textContent=`You're appearing as ${alias}. Your real Callsign and profile remain hidden in this preview.`;$("travelArrival").classList.add("show");$("travelArrival").scrollIntoView({behavior:"smooth",block:"nearest"});btn.disabled=false;btn.textContent="Find Another Meet";$("voyageAlias").value="";},700)};
+$("sendTravelMessage").onclick=()=>{const msg=$("travelMessage").value.trim();if(!msg){$("travelMessageStatus").textContent="Write a transmission first.";return}const bubble=document.createElement("div");bubble.className="arrivalMessage";bubble.textContent=msg;$("arrivalTranscript").appendChild(bubble);$("travelMessage").value="";$("travelMessageStatus").textContent="Local preview only — this transmission has not been delivered to another user.";};
+$("previewPost").onclick=()=>{const post=$("postText").value.trim();if(!post){message("postPreviewStatus","Write something before previewing your Beacon.");return}const audience=$("postAudience").selectedOptions[0].text;message("postPreviewStatus",`Preview ready. Audience: ${audience}. Publishing is not connected yet.`)};
+try{await getRedirectResult(auth)}catch(e){message("authMessage",friendly(e))}
+onAuthStateChanged(auth,async user=>{if(!authOperation)await loadUser(user)});
 </script>
 </body>
-</html>
+      </html>
